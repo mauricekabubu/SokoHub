@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="auth-page">
+
+    <!-- Subtle background shapes -->
+    <div class="auth-bg-shapes" aria-hidden="true">
+        <div class="bg-shape shape-1"></div>
+        <div class="bg-shape shape-2"></div>
+    </div>
+
+    <div class="auth-wrap">
+
+        <!-- Brand -->
+        <a href="{% url 'home' %}" class="auth-brand">
+            <span class="brand-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+                    <path d="M3 6h18"/>
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+            </span>
+            <span class="brand-text">SokoHub</span>
+        </a>
+
+        <!-- Registration Card -->
+        <div class="auth-card">
+
+            <!-- Django Messages / Non-field Errors -->
+            {% if messages %}
+                <div class="auth-alerts" role="alert">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags|default:'error' }}">
+                            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="8" x2="12" y2="12"/>
+                                <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                            <span>{{ message }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if form.non_field_errors %}
+                <div class="auth-alerts" role="alert">
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-error">
+                            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="8" x2="12" y2="12"/>
+                                <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                            <span>{{ error }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+                <a href="{% url 'home' %}">Home</a>
+                <svg class="breadcrumb-separator" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m9 18 6-6-6-6"/>
+                </svg>
+                <span>Account</span>
+                <svg class="breadcrumb-separator" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m9 18 6-6-6-6"/>
+                </svg>
+                <span class="breadcrumb-current" aria-current="page">Register</span>
+            </nav>
+
+            <!-- Header -->
+            <div class="auth-header">
+                <h1 class="auth-title">Create Your Account</h1>
+                <p class="auth-subtitle">Join SokoHub and make your next shopping experience easier.</p>
+            </div>
+
+            <!-- Registration Form -->
+            <form action="{% url 'register' %}" method="POST" class="django-form" id="register-form" novalidate>
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <button type="submit" class="btn-auth">
+                    <span>Create Account</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 12h14"/>
+                        <path d="m12 5 7 7-7 7"/>
+                    </svg>
+                </button>
+            </form>
+
+            <!-- Footer -->
+            <div class="auth-footer">
+                <p class="footer-text">
+                    Already have an account? 
+                    <a href="{% url 'login' %}" class="footer-link">Sign in</a>
+                </p>
+
+                <div class="security-badge">
+                    <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
+                        <path d="m9 12 2 2 4-4"/>
+                    </svg>
+                    <span>Secure account registration</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/register.js' %}"></script>
+
+{% endblock %}

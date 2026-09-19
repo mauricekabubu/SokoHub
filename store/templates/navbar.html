@@ -1,0 +1,112 @@
+<!-- Navigation -->
+<nav class="sh-navbar">
+    <div class="sh-container sh-navbar-inner">
+
+        <a class="sh-logo" href="{% url 'home' %}">
+            <span class="sh-logo-mark" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 8H18L17 20C16.9 21.1 16 22 14.9 22H9.1C8 22 7.1 21.1 7 20L6 8Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                    <path d="M9 8V6C9 4.34315 10.3431 3 12 3C13.6569 3 15 4.34315 15 6V8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+            </span>
+            SokoHub<span style="color: var(--green);">.</span>
+        </a>
+
+        <ul class="sh-nav-links">
+            <li><a class="active" href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'category_summary' %}">Shop</a></li>
+            <li class="sh-nav-dropdown">
+                <a href="{% url 'category_summary' %}" role="button" aria-haspopup="true">Categories</a>
+                <ul class="sh-nav-dropdown-menu">
+                    {% for category in categories %}
+                    <li><a href="{% url 'category' category.name %}">{{ category.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li><a href="{% url 'search' %}">Search</a></li>
+            <li><a href="{% url 'category_summary' %}">Deals</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            
+        </ul>
+
+        <div class="sh-nav-actions">
+            <a href="{% url 'search' %}" class="sh-icon-btn" aria-label="Search">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </a>
+
+            {% if user.is_authenticated %}
+            <div class="sh-nav-dropdown">
+                <button class="sh-icon-btn" aria-label="Account menu" aria-haspopup="true">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M4 20C4 16.6863 7.58172 14 12 14C16.4183 14 20 16.6863 20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                </button>
+                <ul class="sh-nav-dropdown-menu" style="right: 0; left: auto;">
+                    <li><a href="{% url 'update_user' %}">User Profile</a></li>
+                    <li><a href="{% url 'update_info' %}">User Information</a></li>
+                    {% if user.is_superuser %}
+                    <li class="sh-nav-dropdown-divider"></li>
+                    <li><a href="{% url 'shipped_dash' %}">Shipped Orders</a></li>
+                    <li><a href="{% url 'not_shipped_dash' %}">Unshipped Orders</a></li>
+                    {% endif %}
+                    <li class="sh-nav-dropdown-divider"></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </div>
+            {% else %}
+            <a href="{% url 'login' %}" class="sh-icon-btn" aria-label="Login">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M4 20C4 16.6863 7.58172 14 12 14C16.4183 14 20 16.6863 20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </a>
+            {% endif %}
+
+            <a href="{% url 'cart_summary' %}" class="sh-cart-pill">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M6 8H18L17 20C16.9 21.1 16 22 14.9 22H9.1C8 22 7.1 21.1 7 20L6 8Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 8V6C9 4.34315 10.3431 3 12 3C13.6569 3 15 4.34315 15 6V8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+                <span class="sh-cart-text">Cart</span>
+                <span class="sh-cart-badge" id="cart_quantity">{{ cart|length }}</span>
+            </a>
+
+            <button class="sh-nav-toggle" id="sh-drawer-open" aria-label="Open menu" aria-controls="sh-drawer" aria-expanded="false">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="sh-drawer-backdrop" id="sh-drawer-backdrop"></div>
+<aside class="sh-drawer" id="sh-drawer" aria-label="Mobile navigation">
+    <div class="sh-drawer-header">
+        <span class="sh-logo">SokoHub<span style="color: var(--green);">.</span></span>
+        <button class="sh-drawer-close" id="sh-drawer-close" aria-label="Close menu">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6L18 18M6 18L18 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+    </div>
+    <ul class="sh-drawer-links">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'category_summary' %}">Shop</a></li>
+        <li><a href="{% url 'category' 'Laptops' %}">Laptops</a></li>
+        <li><a href="{% url 'category' 'Phones' %}">Phones</a></li>
+        <li><a href="{% url 'search' %}">Search</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+        <li><a href="{% url 'cart_summary' %}">Cart ({{ cart|length }})</a></li>
+    </ul>
+
+    {% if user.is_authenticated %}
+    <p class="sh-drawer-section-label">Account</p>
+    <ul class="sh-drawer-links">
+        <li><a href="{% url 'update_user' %}">User Profile</a></li>
+        <li><a href="{% url 'update_info' %}">User Information</a></li>
+        {% if user.is_superuser %}
+        <li><a href="{% url 'shipped_dash' %}">Shipped Orders</a></li>
+        <li><a href="{% url 'not_shipped_dash' %}">Unshipped Orders</a></li>
+        {% endif %}
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+    {% else %}
+    <p class="sh-drawer-section-label">Account</p>
+    <ul class="sh-drawer-links">
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'register' %}">Register</a></li>
+    </ul>
+    {% endif %}
+</aside>

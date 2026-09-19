@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'css/category.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+<!-- Category hero -->
+<section class="sh-category-hero">
+    <div class="sh-container">
+        <nav class="sh-breadcrumb sh-category-breadcrumb" aria-label="Breadcrumb">
+            <ol>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'category_summary' %}">Categories</a></li>
+                <li aria-current="page">{{ category }}</li>
+            </ol>
+        </nav>
+        <h1 class="sh-category-title">{{ category }}</h1>
+        <p class="sh-category-text">Explore our {{ category }} collection at SokoHub Ecommerce Kenya.</p>
+    </div>
+</section>
+
+<div class="sh-container">
+
+    <!-- Collection toolbar -->
+    <div class="sh-category-toolbar">
+        <div>
+            <h2>{{ category }}</h2>
+            <p>Browse our latest products</p>
+        </div>
+        <span class="sh-category-count">{{ products|length }} product{{ products|length|pluralize }}</span>
+    </div>
+
+    {% if products %}
+    <div class="sh-product-grid sh-category-grid">
+        {% for product in products %}
+        <div class="sh-product-card">
+            {% if product.is_sale %}
+            <span class="sh-sale-badge">Sale</span>
+            {% endif %}
+            <button class="sh-wishlist-btn" aria-label="Add {{ product.name }} to wishlist" type="button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 20.5C12 20.5 3.5 15.4 3.5 9.4C3.5 6.6 5.7 4.5 8.3 4.5C10 4.5 11.3 5.4 12 6.7C12.7 5.4 14 4.5 15.7 4.5C18.3 4.5 20.5 6.6 20.5 9.4C20.5 15.4 12 20.5 12 20.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </button>
+
+            <a href="{% url 'product' product.id %}" class="sh-product-media">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
+                {% else %}
+                <div class="sh-product-placeholder" aria-hidden="true">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="M6 8H18L17 20C16.9 21.1 16 22 14.9 22H9.1C8 22 7.1 21.1 7 20L6 8Z" stroke="currentColor" stroke-width="1.4"/></svg>
+                </div>
+                {% endif %}
+            </a>
+
+            <div class="sh-product-body">
+                <span class="sh-product-category">{{ product.category }}</span>
+                <h3 class="sh-product-name">{{ product.name }}</h3>
+
+                <div class="sh-product-price-row">
+                    {% if product.is_sale %}
+                    <span class="sh-price-current">KES {{ product.sale_price }}</span>
+                    <span class="sh-price-original">KES {{ product.price }}</span>
+                    {% else %}
+                    <span class="sh-price-current">KES {{ product.price }}</span>
+                    {% endif %}
+                </div>
+
+                <a href="{% url 'product' product.id %}" class="sh-product-cta">View Product →</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="sh-category-empty">
+        <span class="sh-category-empty-icon" aria-hidden="true">🛍️</span>
+        <h2>No products found</h2>
+        <p>There are currently no products available in {{ category }}.</p>
+        <a href="{% url 'category_summary' %}" class="sh-btn sh-btn-primary">Browse all products →</a>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

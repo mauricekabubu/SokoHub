@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'css/about.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+<!-- About hero -->
+<section class="sh-hero sh-about-hero">
+    <div class="sh-container sh-hero-grid">
+        <div class="sh-reveal">
+            <span class="sh-hero-label">About SokoHub</span>
+            <h1 class="sh-hero-title sh-about-title">Shopping made simple.<br>Discover. Shop. Enjoy.</h1>
+            <p class="sh-hero-text">SokoHub is a modern Kenyan online marketplace built to make everyday shopping simpler, more convenient and accessible.</p>
+            <div class="sh-hero-actions">
+                <a href="{% url 'home' %}" class="sh-btn sh-btn-primary">Explore products →</a>
+                <a href="#sh-our-story" class="sh-btn sh-btn-outline">Learn more</a>
+            </div>
+        </div>
+        <div class="sh-hero-visual sh-reveal">
+            <div class="sh-hero-blob" aria-hidden="true"></div>
+            <div class="sh-about-collage" aria-hidden="true">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none"><path d="M6 8H18L17 20C16.9 21.1 16 22 14.9 22H9.1C8 22 7.1 21.1 7 20L6 8Z" stroke="currentColor" stroke-width="1.2"/><path d="M9 8V6C9 4.34315 10.3431 3 12 3C13.6569 3 15 4.34315 15 6V8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            </div>
+            <div class="sh-float-chip sh-float-chip-1">✓ Quality Products</div>
+            <div class="sh-float-chip sh-float-chip-2">✓ Secure Shopping</div>
+            <div class="sh-float-chip sh-float-chip-3">✓ Convenient Delivery</div>
+        </div>
+    </div>
+</section>
+
+<!-- Our story -->
+<section class="sh-section sh-reveal" id="sh-our-story">
+    <div class="sh-container sh-story-grid">
+        <div class="sh-story-visual" aria-hidden="true">
+            <div class="sh-story-visual-inner">
+                <svg width="88" height="88" viewBox="0 0 24 24" fill="none"><path d="M4 7L12 3L20 7L12 11L4 7Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M4 7V17L12 21L20 17V7" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            </div>
+        </div>
+        <div>
+            <span class="sh-product-eyebrow">Our Story</span>
+            <h2>Built for the way you shop today.</h2>
+            <p class="sh-body-text">SokoHub Ecommerce Kenya was created with a simple idea: online shopping should be convenient, reliable and enjoyable.</p>
+            <p class="sh-body-text">We aim to bring a growing selection of products together in one easy-to-use marketplace, helping customers discover products they need without the hassle of traditional shopping.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Made for Kenya -->
+<section class="sh-section sh-reveal" style="background: var(--cream);">
+    <div class="sh-container">
+        <div class="sh-section-head" style="justify-content: center; text-align: center; flex-direction: column; align-items: center;">
+            <h2>Made for Kenya.</h2>
+            <p>From everyday essentials to products worth discovering, SokoHub is designed with Kenyan shoppers in mind.</p>
+        </div>
+        <div class="sh-cat-grid sh-kenya-grid">
+            <div class="sh-cat-card" style="cursor: default;">
+                <span class="sh-cat-icon" aria-hidden="true">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </span>
+                <h4>Local Focus</h4>
+                <p>A marketplace designed around the needs of Kenyan shoppers.</p>
+            </div>
+            <div class="sh-cat-card" style="cursor: default;">
+                <span class="sh-cat-icon" aria-hidden="true">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 7V17M9.5 15C9.5 16.1 10.6 17 12 17C13.4 17 14.5 16.1 14.5 15C14.5 13.3 12 13.3 12 12C12 11.9 12 12 12 12C10.6 12 9.5 11.1 9.5 10C9.5 8.9 10.6 8 12 8C13.4 8 14.5 8.9 14.5 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </span>
+                <h4>KES Pricing</h4>
+                <p>Simple and familiar pricing in Kenyan Shillings.</p>
+            </div>
+            <div class="sh-cat-card" style="cursor: default;">
+                <span class="sh-cat-icon" aria-hidden="true">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 7H14V17H3V7Z" stroke="currentColor" stroke-width="1.5"/><path d="M14 10H17.5L21 13.5V17H14V10Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7" cy="19" r="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="17.5" cy="19" r="1.5" stroke="currentColor" stroke-width="1.3"/></svg>
+                </span>
+                <h4>Convenient Shopping</h4>
+                <p>Discover products and shop from wherever you are.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why choose SokoHub -->
+<section class="sh-section sh-reveal">
+    <div class="sh-container">
+        <div class="sh-section-head">
+            <div>
+                <span class="sh-product-eyebrow">Why SokoHub</span>
+                <h2>More than just an online store.</h2>
+            </div>
+        </div>
+        <div class="sh-cat-grid">
+            <div class="sh-cat-card" style="cursor: default;">
+                <span class="sh-cat-icon" aria-hidden="true">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 12L9 17L20 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <h4>Quality Products</h4>
+                <p>Carefully presented products so you can shop with confidence.</p>
+            </div>
+            <div class="sh-cat-card" style="cursor: default;">
+                <span class="sh-cat-icon" aria-hidden="true">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 5V11C4 16 7.4 20.4 12 22C16.6 20.4 20 16 20 11V5L12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                </span>
+                <h4>Secure Shopping</h4>
+                <p>A safe and reliable shopping experience.</p>
+            </div>
+            <div class="sh-cat-card" style="cursor: default;">
+                <span class="sh-cat-icon" aria-hidden="true">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M6 8H18L17 20C16.9 21.1 16 22 14.9 22H9.1C8 22 7.1 21.1 7 20L6 8Z" stroke="currentColor" stroke-width="1.5"/></svg>
+                </span>
+                <h4>Easy Ordering</h4>
+                <p>Find what you need and add it to your cart with ease.</p>
+            </div>
+            <div class="sh-cat-card" style="cursor: default;">
+                <span class="sh-cat-icon" aria-hidden="true">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20C4 16.6863 7.58172 14 12 14C16.4183 14 20 16.6863 20 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </span>
+                <h4>Customer First</h4>
+                <p>We focus on creating a simple and enjoyable experience for every shopper.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission & vision -->
+<section class="sh-mission-vision sh-reveal">
+    <div class="sh-mv-panel sh-mv-mission">
+        <div class="sh-mv-inner">
+            <span class="sh-product-eyebrow">Our Mission</span>
+            <h2>Make online shopping simple for everyone.</h2>
+            <p class="sh-body-text">SokoHub aims to provide an accessible and convenient digital marketplace where customers can discover and purchase products easily.</p>
+        </div>
+    </div>
+    <div class="sh-mv-panel sh-mv-vision">
+        <div class="sh-mv-inner">
+            <span class="sh-product-eyebrow">Our Vision</span>
+            <h2>A better way to shop online in Kenya.</h2>
+            <p class="sh-body-text">Our long-term goal is to build a trusted, modern and convenient e-commerce experience for shoppers across Kenya.</p>
+        </div>
+    </div>
+</section>
+
+<!-- How SokoHub works -->
+<section class="sh-section sh-reveal">
+    <div class="sh-container">
+        <div class="sh-section-head">
+            <div>
+                <h2>Shopping made easy.</h2>
+            </div>
+        </div>
+        <div class="sh-timeline">
+            <div class="sh-timeline-step">
+                <span class="sh-timeline-num">01</span>
+                <h4>Discover</h4>
+                <p>Browse products and categories.</p>
+            </div>
+            <div class="sh-timeline-step">
+                <span class="sh-timeline-num">02</span>
+                <h4>Choose</h4>
+                <p>Open a product and explore its details.</p>
+            </div>
+            <div class="sh-timeline-step">
+                <span class="sh-timeline-num">03</span>
+                <h4>Add to Cart</h4>
+                <p>Select your quantity and add the product to your cart.</p>
+            </div>
+            <div class="sh-timeline-step">
+                <span class="sh-timeline-num">04</span>
+                <h4>Checkout</h4>
+                <p>Complete your order through the available checkout process.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Shopping benefits -->
+<section class="sh-trust sh-reveal">
+    <div class="sh-container sh-trust-grid">
+        <div class="sh-trust-item">
+            <span class="sh-trust-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 7H14V17H3V7Z" stroke="currentColor" stroke-width="1.6"/><path d="M14 10H17.5L21 13.5V17H14V10Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7" cy="19" r="1.6" stroke="currentColor" stroke-width="1.4"/><circle cx="17.5" cy="19" r="1.6" stroke="currentColor" stroke-width="1.4"/></svg>
+            </span>
+            <div><h4>Fast Delivery</h4><p>Convenient delivery options.</p></div>
+        </div>
+        <div class="sh-trust-item">
+            <span class="sh-trust-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 5V11C4 16 7.4 20.4 12 22C16.6 20.4 20 16 20 11V5L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </span>
+            <div><h4>Secure Shopping</h4><p>Shop with confidence.</p></div>
+        </div>
+        <div class="sh-trust-item">
+            <span class="sh-trust-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 12L9 17L20 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div><h4>Easy Returns</h4><p>A customer-friendly shopping experience.</p></div>
+        </div>
+        <div class="sh-trust-item">
+            <span class="sh-trust-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M9.5 9.5C9.5 8.4 10.4 7.5 12 7.5C13.4 7.5 14.5 8.3 14.5 9.5C14.5 11 12 11.2 12 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="16" r="0.9" fill="currentColor"/></svg>
+            </span>
+            <div><h4>Customer Support</h4><p>We're here to help.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- SokoHub values -->
+<section class="sh-section sh-reveal">
+    <div class="sh-container">
+        <div class="sh-section-head">
+            <div>
+                <h2>What we stand for.</h2>
+            </div>
+        </div>
+        <div class="sh-values-grid">
+            <div class="sh-value-item">
+                <span class="sh-cat-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/></svg>
+                </span>
+                <h4>Simplicity</h4>
+                <p>Make shopping straightforward.</p>
+            </div>
+            <div class="sh-value-item">
+                <span class="sh-cat-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 5V11C4 16 7.4 20.4 12 22C16.6 20.4 20 16 20 11V5L12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                </span>
+                <h4>Trust</h4>
+                <p>Build confidence with every interaction.</p>
+            </div>
+            <div class="sh-value-item">
+                <span class="sh-cat-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M8 10V7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7V10" stroke="currentColor" stroke-width="1.5"/></svg>
+                </span>
+                <h4>Convenience</h4>
+                <p>Make it easier to find and purchase products.</p>
+            </div>
+            <div class="sh-value-item">
+                <span class="sh-cat-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 18L10 12L14 16L20 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 8H20V13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <h4>Growth</h4>
+                <p>Continuously improve the SokoHub experience.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="sh-about-cta sh-reveal">
+    <div class="sh-container">
+        <h2>Ready to start shopping?</h2>
+        <p>Explore our products and discover something you'll love.</p>
+        <a href="{% url 'home' %}" class="sh-btn sh-btn-light">Shop now →</a>
+    </div>
+</section>
+
+{% include 'includes/newsletter.html' %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/about.js' %}"></script>
+{% endblock %}

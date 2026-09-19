@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'css/update_info.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+<div class="sokohub-account">
+
+  <!-- ==========================================
+       ACCOUNT HEADER
+       ========================================== -->
+  <header class="account-header">
+    <div class="container">
+      <span class="account-eyebrow">Account Settings</span>
+      <h1 class="account-title">Your Information</h1>
+      <p class="account-subtitle">Manage your personal details, billing information and delivery address.</p>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       MAIN ACCOUNT CONTENT
+       ========================================== -->
+  <div class="account-container">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="account-sidebar">
+      <nav class="sidebar-nav" aria-label="Account settings sections">
+        <div class="sidebar-heading">Account</div>
+        <a href="#billing-info" class="sidebar-link active">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          Personal Information
+        </a>
+        <a href="#shipping-info" class="sidebar-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          Shipping Address
+        </a>
+        <a href="#security" class="sidebar-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          Security
+        </a>
+      </nav>
+    </aside>
+
+    <!-- RIGHT MAIN CONTENT -->
+    <main class="account-main">
+
+      <!-- Django Messages -->
+      {% if messages %}
+        <div class="messages-container">
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {% if message.tags == 'success' %}
+                <svg class="alert-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              {% elif message.tags == 'error' or message.tags == 'danger' %}
+                <svg class="alert-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="15" y1="9" x2="9" y2="15"></line>
+                  <line x1="9" y1="9" x2="15" y2="15"></line>
+                </svg>
+              {% else %}
+                <svg class="alert-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+              {% endif %}
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <form action="{% url 'update_info' %}" method="POST">
+        {% csrf_token %}
+
+        <!-- BILLING INFORMATION -->
+        <section class="settings-card" id="billing-info">
+          <div class="card-header-section">
+            <div class="card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                <line x1="1" y1="10" x2="22" y2="10"></line>
+              </svg>
+            </div>
+            <div class="card-header-text">
+              <h2 class="card-title">Billing Information</h2>
+              <p class="card-subtitle">Keep your personal and billing details up to date.</p>
+            </div>
+          </div>
+          <div class="card-body">
+            {{ form.as_p }}
+          </div>
+        </section>
+
+        <!-- SHIPPING INFORMATION -->
+        <section class="settings-card" id="shipping-info">
+          <div class="card-header-section">
+            <div class="card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <div class="card-header-text">
+              <h2 class="card-title">Shipping Information</h2>
+              <p class="card-subtitle">Save your preferred delivery details for a smoother checkout experience.</p>
+            </div>
+          </div>
+          <div class="card-body">
+            {{ shipping_form.as_p }}
+          </div>
+        </section>
+
+        <!-- SAVE BUTTON -->
+        <button type="submit" class="btn-save">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          Save Changes
+        </button>
+
+      </form>
+
+      <!-- SECURITY SECTION -->
+      <section class="settings-card security-card" id="security">
+        <div class="card-header-section">
+          <div class="card-icon security-icon-bg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <div class="card-header-text">
+            <h2 class="card-title">Security</h2>
+            <p class="card-subtitle">Keep your account secure by regularly reviewing your password.</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="security-row">
+            <div>
+              <div class="security-label">Password</div>
+              <div class="security-desc">Update your account password securely.</div>
+            </div>
+            <a href="{% url 'update_password' %}" class="btn-secondary">
+              Update Password
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+{% endblock %}

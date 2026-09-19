@@ -1,0 +1,19 @@
+<!-- Newsletter (shared partial) -->
+<section class="sh-newsletter">
+    <div class="sh-container">
+        <h2>Stay in the loop</h2>
+        <p>Subscribe for new arrivals, exclusive deals and special offers.</p>
+        <form class="sh-newsletter-form"
+            id="sh-newsletter-form"
+            action="{% url 'newsletter_subscribe' %}"
+            method="post">
+            {% csrf_token %}
+
+            <input type="email" id="sh-newsletter-email" name="email" placeholder="Enter your email" required>
+
+            <button type="submit" class="sh-btn sh-btn-light">
+                Subscribe
+            </button>
+        </form>
+    </div>
+</section>

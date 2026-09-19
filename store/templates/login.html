@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="auth-page">
+
+    <!-- Subtle background shapes -->
+    <div class="auth-bg-shapes" aria-hidden="true">
+        <div class="bg-shape shape-1"></div>
+        <div class="bg-shape shape-2"></div>
+    </div>
+
+    <div class="auth-wrap">
+
+        <!-- Brand -->
+        <a href="{% url 'home' %}" class="auth-brand">
+            <span class="brand-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+                    <path d="M3 6h18"/>
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+            </span>
+            <span class="brand-text">SokoHub</span>
+        </a>
+
+        <!-- Login Card -->
+        <div class="auth-card">
+
+            <!-- Django Messages / Authentication Errors -->
+            {% if messages %}
+                <div class="auth-alerts" role="alert">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags|default:'error' }}">
+                            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="8" x2="12" y2="12"/>
+                                <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                            <span>{{ message }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if form.errors and not messages %}
+                <div class="auth-alerts" role="alert">
+                    <div class="alert alert-error">
+                        <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        <span>Unable to sign in. Please check your username and password.</span>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Header -->
+            <div class="auth-header">
+                <h1 class="auth-title">Welcome Back</h1>
+                <p class="auth-subtitle">Sign in to your SokoHub account to continue shopping.</p>
+            </div>
+
+            <!-- Login Form -->
+            <form action="{% url 'login' %}" method="POST" class="auth-form" id="login-form" novalidate>
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="id_username" class="form-label">Username</label>
+                    <input 
+                        type="text" 
+                        name="username" 
+                        id="id_username" 
+                        class="form-control" 
+                        placeholder="Enter username"
+                        autocomplete="username"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="id_password" class="form-label">Password</label>
+                    <div class="password-wrap">
+                        <input 
+                            type="password" 
+                            name="password" 
+                            id="id_password" 
+                            class="form-control" 
+                            placeholder="Enter password"
+                            autocomplete="current-password"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-field">
+                        <input type="checkbox" id="remember-me" class="checkbox-input">
+                        <span class="checkbox-box" aria-hidden="true">
+                            <svg class="checkbox-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </span>
+                        <span class="checkbox-label">Remember me</span>
+                    </label>
+                    <a href="#" class="text-link">Forgot your password?</a>
+                </div>
+
+                <button type="submit" class="btn-auth">
+                    <span>Sign In</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 12h14"/>
+                        <path d="m12 5 7 7-7 7"/>
+                    </svg>
+                </button>
+            </form>
+
+            <!-- Footer -->
+            <div class="auth-footer">
+                <p class="footer-text">
+                    Don't have an account? 
+                    <a href="{% url 'register' %}" class="footer-link">Create an account</a>
+                </p>
+
+                <div class="security-badge">
+                    <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
+                        <path d="m9 12 2 2 4-4"/>
+                    </svg>
+                    <span class="badge-text">Secure account access</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/login.js' %}"></script>
+
+{% endblock %}

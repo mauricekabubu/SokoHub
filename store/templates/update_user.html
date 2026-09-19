@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'css/update_user.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+<div class="account-dashboard">
+    <div class="account-container">
+
+        <!-- Header -->
+        <header class="account-header">
+            <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+                <a href="{% url 'home' %}">Home</a>
+                <svg class="breadcrumb-separator" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m9 18 6-6-6-6"/>
+                </svg>
+                <span>Account</span>
+                <svg class="breadcrumb-separator" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m9 18 6-6-6-6"/>
+                </svg>
+                <span class="breadcrumb-current" aria-current="page">Profile</span>
+            </nav>
+            <div class="account-title-group">
+                <span class="account-label">Account</span>
+                <h1 class="account-title">My Profile</h1>
+                <p class="account-subtitle">Manage your personal account information and security settings.</p>
+            </div>
+        </header>
+
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" aria-label="Account sections">
+            <ul class="mobile-nav-list">
+                <li class="mobile-nav-item">
+                    <a href="{% url 'update_user' %}" class="mobile-nav-link active" aria-current="page">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        Profile
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="{% url 'update_info' %}" class="mobile-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M20 7h-9"/>
+                            <path d="M14 17H5"/>
+                            <circle cx="17" cy="17" r="3"/>
+                            <circle cx="7" cy="7" r="3"/>
+                        </svg>
+                        Billing & Shipping
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="{% url 'update_password' %}" class="mobile-nav-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                        Security
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Layout Grid -->
+        <div class="account-layout">
+
+            <!-- Sidebar -->
+            <aside class="account-sidebar" aria-label="Account navigation">
+                <div class="sidebar-card">
+                    <h2 class="sidebar-title">Account</h2>
+                    <nav>
+                        <ul class="nav-list">
+                            <li>
+                                <a href="{% url 'update_user' %}" class="nav-item active" aria-current="page">
+                                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                                        <circle cx="12" cy="7" r="4"/>
+                                    </svg>
+                                    Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'update_info' %}" class="nav-item">
+                                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M20 7h-9"/>
+                                        <path d="M14 17H5"/>
+                                        <circle cx="17" cy="17" r="3"/>
+                                        <circle cx="7" cy="7" r="3"/>
+                                    </svg>
+                                    Billing & Shipping
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'update_password' %}" class="nav-item">
+                                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                    </svg>
+                                    Security
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="account-main">
+
+                <!-- Profile Overview Card -->
+                <section class="sh-card">
+                    <div class="card-padding">
+                        <div class="profile-overview">
+                            <div class="avatar" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                            </div>
+                            <div class="profile-meta">
+                                <p class="profile-meta-title">Your Profile</p>
+                                <p class="profile-meta-text">Manage your personal information</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Personal Information Form Card -->
+                <section class="sh-card" aria-labelledby="personal-info-heading">
+                    <div class="card-padding">
+                        <div class="card-header-flex">
+                            <div class="card-header-text">
+                                <h2 id="personal-info-heading" class="card-title">
+                                    <span class="card-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <path d="M12 20h9"/>
+                                            <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                                        </svg>
+                                    </span>
+                                    Personal Information
+                                </h2>
+                                <p class="card-subtitle">Keep your account details up to date.</p>
+                            </div>
+                        </div>
+
+                        <form action="{% url 'update_user' %}" method="POST" class="django-form">
+                            {% csrf_token %}
+                            {{ user_form.as_p }}
+
+                            <button type="submit" class="btn-sh-primary" style="margin-top: 0.5rem;">
+                                Save Changes
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M5 12h14"/>
+                                    <path d="m12 5 7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Billing & Shipping Shortcut -->
+                <section class="sh-card" aria-labelledby="billing-heading">
+                    <a href="{% url 'update_info' %}" class="info-link-card" aria-labelledby="billing-title">
+                        <div class="info-link-text">
+                            <p id="billing-title" class="info-link-title">Billing & Shipping</p>
+                            <p class="info-link-desc">Manage your delivery and billing information.</p>
+                        </div>
+                        <span class="info-link-arrow" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"/>
+                                <path d="m12 5 7 7-7 7"/>
+                            </svg>
+                        </span>
+                    </a>
+                </section>
+
+                <!-- Security Card -->
+                <section class="sh-card" aria-labelledby="security-heading">
+                    <div class="card-padding">
+                        <div class="card-header-flex">
+                            <div class="card-header-text">
+                                <h2 id="security-heading" class="card-title">
+                                    <span class="card-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
+                                            <path d="m9 12 2 2 4-4"/>
+                                        </svg>
+                                    </span>
+                                    Account Security
+                                </h2>
+                                <p class="card-subtitle">Keep your account protected with a strong password.</p>
+                            </div>
+                        </div>
+
+                        <div class="security-row">
+                            <div class="security-info">
+                                <p class="security-label">Password</p>
+                                <p class="security-desc">Manage your account password securely.</p>
+                            </div>
+                            <a href="{% url 'update_password' %}" class="btn-sh-secondary">
+                                Update Password
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M5 12h14"/>
+                                    <path d="m12 5 7 7-7 7"/>
+                                </svg>
+                            </a>
+                        </div>
+
+                        <div class="security-hint">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 16v-4"/>
+                                <path d="M12 8h.01"/>
+                            </svg>
+                            Regularly updating your password can help keep your account secure.
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
