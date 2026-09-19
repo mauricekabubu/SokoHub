@@ -14,8 +14,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+"""
+URL configuration for ecom project.
+"""
+
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
 from . import settings
 from django.conf.urls.static import static
 
@@ -26,8 +31,8 @@ def health_check(request):
 
 urlpatterns = [
     path("health/", health_check),
-    path('admin/', admin.site.urls),
-    path('', include('store.urls')),
-    path('cart/', include('cart.urls')),
-    path('payment/', include('payment.urls')),
+    path("admin/", admin.site.urls),
+    path("", include("store.urls")),
+    path("cart/", include("cart.urls")),
+    path("payment/", include("payment.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
