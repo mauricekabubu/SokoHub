@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'css/admin.css' %}" rel="stylesheet" />
+<link href="{% static 'css/order.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+<div class="sh-admin sh-container">
+
+    <!-- Breadcrumb -->
+    <nav class="sh-admin-breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li>Dashboard</li>
+            <li>Orders</li>
+            <li aria-current="page">#{{ order.id }}</li>
+        </ol>
+    </nav>
+
+    <!-- Order header -->
+    <div class="sh-admin-header sh-order-header">
+        <div>
+            <h1>Order #{{ order.id }}</h1>
+            <p>Order details and fulfillment</p>
+        </div>
+        <div class="sh-order-header-right">
+            {% if order.shipped %}
+            <span class="sh-admin-badge sh-admin-badge-shipped sh-order-status-badge">
+                <span aria-hidden="true">●</span> Shipped
+            </span>
+            {% else %}
+            <span class="sh-admin-badge sh-admin-badge-pending sh-order-status-badge">
+                <span aria-hidden="true">●</span> Pending Shipment
+            </span>
+            {% endif %}
+            <span class="sh-order-total">KSh {{ order.amount_paid }}</span>
+        </div>
+    </div>
+
+    <!-- Two-column layout -->
+    <div class="sh-order-layout">
+
+        <!-- Main column -->
+        <div class="sh-order-main">
+
+            <!-- Order items -->
+            <section class="sh-admin-card sh-order-section">
+                <h2 class="sh-order-section-title">Order Items</h2>
+
+                <div class="sh-order-items-table-wrap">
+                    <table class="sh-admin-table sh-order-items-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in items %}
+                            <tr>
+                                <td class="sh-order-item-product">{{ item.product }}</td>
+                                <td><span class="sh-order-qty-badge">×{{ item.quantity }}</span></td>
+                                <td class="sh-order-item-price">KSh {{ item.price }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="sh-order-items-cards">
+                    {% for item in items %}
+                    <div class="sh-order-item-card">
+                        <span class="sh-order-item-product">{{ item.product }}</span>
+                        <div class="sh-order-item-card-row">
+                            <span class="sh-order-qty-badge">×{{ item.quantity }}</span>
+                            <span class="sh-order-item-price">KSh {{ item.price }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- Order timeline -->
+            <section class="sh-admin-card sh-order-section">
+                <h2 class="sh-order-section-title">Order Timeline</h2>
+                <ol class="sh-order-timeline">
+                    <li class="sh-order-timeline-step is-complete">
+                        <span class="sh-order-timeline-dot" aria-hidden="true"></span>
+                        <div>
+                            <h4>Order placed</h4>
+                            <p>{{ order.date_ordered }}</p>
+                        </div>
+                    </li>
+                    <li class="sh-order-timeline-step {% if order.shipped %}is-complete{% endif %}">
+                        <span class="sh-order-timeline-dot" aria-hidden="true"></span>
+                        <div>
+                            <h4>Shipment</h4>
+                            {% if order.shipped %}
+                            <p>{{ order.date_shipped }}</p>
+                            {% else %}
+                            <p class="sh-muted">Awaiting shipment</p>
+                            {% endif %}
+                        </div>
+                    </li>
+                </ol>
+            </section>
+
+            <!-- Fulfillment -->
+            <section class="sh-admin-card sh-order-section sh-fulfillment-card">
+                {% if not order.shipped %}
+                <div class="sh-fulfillment-status sh-fulfillment-status-pending">
+                    <span aria-hidden="true">🟠</span>
+                    <div>
+                        <h3>Order Awaiting Shipment</h3>
+                        <p>This order has not been marked as shipped yet.</p>
+                    </div>
+                </div>
+                <form method="POST" class="sh-admin-unship-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="shipping_status" value="true">
+                    <button type="submit" class="sh-admin-ship-btn sh-fulfillment-btn">✓ Mark as Shipped</button>
+                </form>
+                {% else %}
+                <div class="sh-fulfillment-status sh-fulfillment-status-shipped">
+                    <span aria-hidden="true">🟢</span>
+                    <div>
+                        <h3>Order Shipped</h3>
+                        <p>This order has been marked as shipped.</p>
+                    </div>
+                </div>
+                <form method="POST" class="sh-admin-unship-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="shipping_status" value="false">
+                    <button type="submit" class="sh-admin-unship-btn sh-fulfillment-btn">↩ Mark as Not Shipped</button>
+                </form>
+                {% endif %}
+            </section>
+        </div>
+
+        <!-- Side column -->
+        <div class="sh-order-side">
+
+            <!-- Order overview -->
+            <section class="sh-admin-card sh-order-section">
+                <h2 class="sh-order-section-title">Order Overview</h2>
+                <dl class="sh-order-overview-list">
+                    <div>
+                        <dt>Order ID</dt>
+                        <dd>#{{ order.id }}</dd>
+                    </div>
+                    <div>
+                        <dt>Total</dt>
+                        <dd>KSh {{ order.amount_paid }}</dd>
+                    </div>
+                    <div>
+                        <dt>Order Date</dt>
+                        <dd>{{ order.date_ordered }}</dd>
+                    </div>
+                    <div>
+                        <dt>Shipping Status</dt>
+                        <dd>
+                            {% if order.shipped %}Shipped{% else %}Pending Shipment{% endif %}
+                        </dd>
+                    </div>
+                    {% if order.shipped %}
+                    <div>
+                        <dt>Date Shipped</dt>
+                        <dd>{{ order.date_shipped }}</dd>
+                    </div>
+                    {% endif %}
+                </dl>
+            </section>
+
+            <!-- Customer information -->
+            <section class="sh-admin-card sh-order-section">
+                <h2 class="sh-order-section-title">Customer Information</h2>
+                <dl class="sh-order-overview-list">
+                    <div>
+                        <dt>Name</dt>
+                        <dd>{{ order.full_name }}</dd>
+                    </div>
+                    <div>
+                        <dt>Email</dt>
+                        <dd>{{ order.email }}</dd>
+                    </div>
+                </dl>
+            </section>
+
+            <!-- Shipping address -->
+            <section class="sh-admin-card sh-order-section">
+                <h2 class="sh-order-section-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="vertical-align: -3px; margin-right: 4px;"><path d="M12 21C12 21 5 14.5 5 9.5C5 5.9 8.1 3 12 3C15.9 3 19 5.9 19 9.5C19 14.5 12 21 12 21Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.3" stroke="currentColor" stroke-width="1.5"/></svg>
+                    Shipping Address
+                </h2>
+                <p class="sh-order-address">{{ order.shipping_address }}</p>
+            </section>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

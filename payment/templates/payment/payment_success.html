@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/payment_success.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="success-page">
+
+    <div class="success-container">
+
+        <section class="success-card" aria-labelledby="success-heading">
+
+            <!-- ==========================================
+                 SUCCESS ICON
+                 ========================================== -->
+
+            <div class="success-icon-wrap">
+
+                <span class="success-icon" aria-hidden="true">
+
+                    <svg width="40" height="40" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor"
+                         stroke-width="3" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+
+                </span>
+
+            </div>
+
+
+            <!-- ==========================================
+                 HEADING + MESSAGE
+                 ========================================== -->
+
+            <h1 class="success-heading" id="success-heading">
+                Payment Successful!
+            </h1>
+
+            <p class="success-message">
+                Your M-Pesa payment has been received successfully.
+                Your order is now being processed.
+            </p>
+
+
+            <!-- ==========================================
+                 ORDER CONFIRMATION CARD
+                 ========================================== -->
+
+            {% if order %}
+            <div class="order-summary-card">
+
+                <div class="summary-row">
+                    <span class="summary-label">Order Number</span>
+                    <span class="summary-value">#{{ order.id }}</span>
+                </div>
+
+                <div class="summary-row">
+                    <span class="summary-label">Payment Method</span>
+                    <span class="summary-value">
+                        {% if order.get_payment_method_display %}
+                            {{ order.get_payment_method_display }}
+                        {% else %}
+                            M-Pesa
+                        {% endif %}
+                    </span>
+                </div>
+
+                <div class="summary-row">
+                    <span class="summary-label">Payment Status</span>
+                    <span class="summary-value summary-value-success">
+                        {% if order.get_payment_status_display %}
+                            {{ order.get_payment_status_display }}
+                        {% else %}
+                            Paid
+                        {% endif %}
+                    </span>
+                </div>
+
+                <div class="summary-row">
+                    <span class="summary-label">Order Status</span>
+                    <span class="summary-value">
+                        {% if order.shipped %}
+                            Shipped
+                        {% else %}
+                            Processing
+                        {% endif %}
+                    </span>
+                </div>
+
+                {% if transaction.completed_at %}
+                <div class="summary-row">
+                    <span class="summary-label">Payment Date</span>
+                    <span class="summary-value">{{ transaction.completed_at }}</span>
+                </div>
+                {% elif order.date_ordered %}
+                <div class="summary-row">
+                    <span class="summary-label">Order Date</span>
+                    <span class="summary-value">{{ order.date_ordered }}</span>
+                </div>
+                {% endif %}
+
+            </div>
+            {% endif %}
+
+
+            <!-- ==========================================
+                 M-PESA RECEIPT
+                 ========================================== -->
+
+            {% if transaction.mpesa_receipt_number %}
+            <div class="receipt-block">
+                <span class="receipt-label">M-Pesa Receipt</span>
+                <span class="receipt-value">{{ transaction.mpesa_receipt_number }}</span>
+            </div>
+            {% endif %}
+
+
+            <!-- ==========================================
+                 AMOUNT PAID
+                 ========================================== -->
+
+            {% if transaction.amount or order.amount_paid %}
+            <div class="amount-block">
+                <span class="amount-label">Amount Paid</span>
+                <span class="amount-value">
+                    KES
+                    {% if transaction.amount %}
+                        {{ transaction.amount }}
+                    {% else %}
+                        {{ order.amount_paid }}
+                    {% endif %}
+                </span>
+            </div>
+            {% endif %}
+
+
+            <!-- ==========================================
+                 NEXT STEPS
+                 ========================================== -->
+
+            <div class="next-steps">
+                <p class="next-steps-title">What's next?</p>
+                <p class="next-steps-text">
+                    We're processing your order now. You'll receive updates
+                    as your order progresses.
+                </p>
+            </div>
+
+
+            <!-- ==========================================
+                 ACTIONS
+                 ========================================== -->
+
+            <div class="success-actions">
+
+                {# Adjust 'store' below if your storefront URL name differs. #}
+                <a href="{% url 'home' %}" class="btn-continue-shopping">
+                    Continue Shopping
+                </a>
+
+                {% if user.is_authenticated and user.is_superuser %}
+                <a href="{% url 'not_shipped_dash' %}" class="btn-continue-shopping-secondary">
+                    View Order
+                </a>
+                {% endif %}
+
+            </div>
+
+        </section>
+
+    </div>
+
+</div>
+
+{% endblock %}

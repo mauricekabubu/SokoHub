@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'css/checkout.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+<!-- Checkout hero -->
+<section class="sh-checkout-hero">
+    <div class="sh-container sh-checkout-hero-inner">
+        <span class="sh-hero-label">Secure checkout</span>
+        <h1 class="sh-checkout-title">Complete Your Order</h1>
+        <p class="sh-checkout-subtitle">Review your items and provide your shipping information to continue.</p>
+
+        <ol class="sh-checkout-progress">
+            <li class="is-complete"><span class="sh-checkout-progress-num">1</span> Cart</li>
+            <li class="is-active"><span class="sh-checkout-progress-num">2</span> Shipping</li>
+            <li><span class="sh-checkout-progress-num">3</span> Billing</li>
+            <li><span class="sh-checkout-progress-num">4</span> Complete</li>
+        </ol>
+    </div>
+</section>
+
+<div class="sh-container">
+    <div class="sh-checkout-layout">
+
+        <!-- Shipping information -->
+        <div class="sh-checkout-main">
+            <div class="sh-checkout-card">
+                <h2 class="sh-checkout-card-title">Shipping Information</h2>
+                <p class="sh-checkout-card-subtitle">Where should we deliver your order?</p>
+
+                <form action="{% url 'billing_info' %}" method="POST" class="sh-checkout-form">
+                    {% csrf_token %}
+                    {{ shipping_form.as_p }}
+                    <button type="submit" class="sh-btn sh-btn-primary sh-checkout-submit">Continue to Billing →</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Order summary -->
+        <aside class="sh-checkout-side">
+            <div class="sh-checkout-card sh-checkout-summary">
+                <h2 class="sh-checkout-card-title">Your Order</h2>
+
+                <div class="sh-checkout-items">
+                    {% for product in cart_products %}
+                    <div class="sh-checkout-item">
+                        <div class="sh-checkout-item-media">
+                            {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                            {% else %}
+                            <div class="sh-product-placeholder" aria-hidden="true">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 8H18L17 20C16.9 21.1 16 22 14.9 22H9.1C8 22 7.1 21.1 7 20L6 8Z" stroke="currentColor" stroke-width="1.4"/></svg>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="sh-checkout-item-info">
+                            <span class="sh-checkout-item-name">{{ product.name }}</span>
+                            <span class="sh-checkout-item-qty">
+                                Qty
+                                {% for key, value in quantities.items %}
+                                    {% if key == product.id|slugify %}{{ value }}{% endif %}
+                                {% endfor %}
+                            </span>
+                        </div>
+                        <span class="sh-checkout-item-price">
+                            {% if product.is_sale %}
+                            KES {{ product.sale_price }} <span class="sh-checkout-item-original">KES {{ product.price }}</span>
+                            {% else %}
+                            KES {{ product.price }}
+                            {% endif %}
+                        </span>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="sh-summary-divider"></div>
+
+                <div class="sh-checkout-total-row">
+                    <span>Order Total</span>
+                    <span class="sh-checkout-total-value">KES {{ totals }}</span>
+                </div>
+
+                <a href="{% url 'cart_summary' %}" class="sh-btn sh-btn-outline sh-checkout-edit-cart">← Edit Cart</a>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Trust indicators -->
+    <div class="sh-checkout-trust">
+        <div class="sh-checkout-trust-item">
+            <span aria-hidden="true">✓</span>
+            <div><h4>Secure Checkout</h4><p>Your checkout information is submitted securely.</p></div>
+        </div>
+        <div class="sh-checkout-trust-item">
+            <span aria-hidden="true">✓</span>
+            <div><h4>Simple Shopping</h4><p>Review your order before continuing.</p></div>
+        </div>
+        <div class="sh-checkout-trust-item">
+            <span aria-hidden="true">✓</span>
+            <div><h4>SokoHub Kenya</h4><p>Your everyday marketplace.</p></div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

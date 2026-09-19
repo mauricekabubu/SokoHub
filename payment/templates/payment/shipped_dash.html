@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'css/admin.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+<div class="sh-admin sh-container">
+
+    <!-- Breadcrumb -->
+    <nav class="sh-admin-breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li>Dashboard</li>
+            <li>Orders</li>
+            <li aria-current="page">Shipped</li>
+        </ol>
+    </nav>
+
+    <!-- Header -->
+    <div class="sh-admin-header">
+        <div>
+            <h1>Orders</h1>
+            <p>Manage and track your shipped orders</p>
+        </div>
+        <span class="sh-admin-status-badge">
+            <span class="sh-admin-status-dot" aria-hidden="true"></span>
+            Shipped Orders
+        </span>
+    </div>
+
+    <!-- Summary card -->
+    <div class="sh-admin-summary">
+        <span class="sh-admin-summary-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 7H14V17H3V7Z" stroke="currentColor" stroke-width="1.6"/><path d="M14 10H17.5L21 13.5V17H14V10Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7" cy="19" r="1.6" stroke="currentColor" stroke-width="1.4"/><circle cx="17.5" cy="19" r="1.6" stroke="currentColor" stroke-width="1.4"/></svg>
+        </span>
+        <div>
+            <span class="sh-admin-summary-value">{{ orders|length }}</span>
+            <span class="sh-admin-summary-label">Orders currently marked as shipped</span>
+        </div>
+    </div>
+
+    {% if orders %}
+
+    <!-- Desktop / tablet table -->
+    <div class="sh-admin-card sh-admin-table-wrap">
+        <table class="sh-admin-table">
+            <thead>
+                <tr>
+                    <th scope="col">Order</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Date Ordered</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"><span class="sh-visually-hidden">Actions</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in orders %}
+                <tr>
+                    <td>
+                        <a href="{% url 'orders' item.id %}" class="btn btn-success btn-sm">#{{ item.id }}</a>
+                    </td>
+                    <td>
+                        <span class="sh-admin-amount">KSh {{ item.amount_paid }}</span>
+                    </td>
+                    <td>
+                        <div class="sh-admin-customer">
+                            <span class="sh-admin-avatar" aria-hidden="true">{{ item.email|slice:":1"|upper }}</span>
+                            <span>{{ item.email }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="sh-admin-date">{{ item.date_ordered }}</span>
+                    </td>
+                    <td>
+                        <span class="sh-admin-badge sh-admin-badge-shipped">
+                            <span aria-hidden="true">●</span> Shipped
+                        </span>
+                    </td>
+                    <td>
+                        <form method="POST" action="" class="sh-admin-unship-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="shipping_status" value="false">
+                            <input type="hidden" name="num" value="{{ item.id }}">
+                            <button type="submit" class="sh-admin-unship-btn" data-confirm="Mark this order as unshipped?">
+                                ↩ Mark Unshipped
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Mobile order cards (same data, stacked layout) -->
+    <div class="sh-admin-cards">
+        {% for item in orders %}
+        <div class="sh-admin-order-card">
+            <div class="sh-admin-order-card-top">
+                <a href="{% url 'orders' item.id %}" class="sh-admin-order-link">Order #{{ item.id }}</a>
+                <span class="sh-admin-badge sh-admin-badge-shipped">
+                    <span aria-hidden="true">●</span> Shipped
+                </span>
+            </div>
+            <span class="sh-admin-amount sh-admin-amount-lg">KSh {{ item.amount_paid }}</span>
+            <div class="sh-admin-customer">
+                <span class="sh-admin-avatar" aria-hidden="true">{{ item.email|slice:":1"|upper }}</span>
+                <span>{{ item.email }}</span>
+            </div>
+            <span class="sh-admin-date">{{ item.date_ordered }}</span>
+
+            <form method="POST" action="" class="sh-admin-unship-form sh-admin-unship-form-block">
+                {% csrf_token %}
+                <input type="hidden" name="shipping_status" value="false">
+                <input type="hidden" name="num" value="{{ item.id }}">
+                <button type="submit" class="sh-admin-unship-btn sh-admin-unship-btn-block" data-confirm="Mark this order as unshipped?">
+                    ↩ Mark Unshipped
+                </button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="sh-admin-empty">
+        <span class="sh-admin-empty-icon" aria-hidden="true">📦</span>
+        <h2>No shipped orders yet</h2>
+        <p>Orders marked as shipped will appear here.</p>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/admin.js' %}"></script>
+{% endblock %}

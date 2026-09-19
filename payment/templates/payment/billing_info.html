@@ -1,0 +1,1094 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'css/billing_info.css' %}" rel="stylesheet">
+<link href="{% static 'css/mpesa_payment.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div class="sokohub-checkout">
+
+    <!-- ==========================================
+         CHECKOUT HEADER
+         ========================================== -->
+
+    <header class="checkout-header">
+        <div class="container">
+
+            <span class="checkout-eyebrow">Secure Checkout</span>
+
+            <h1 class="checkout-title">Review &amp; Pay</h1>
+
+            <p class="checkout-subtitle">
+                Confirm your order details and complete your payment.
+            </p>
+
+            <!-- Progress Indicator -->
+
+            <nav class="checkout-progress" aria-label="Checkout progress">
+
+                <div class="step completed">
+                    <span class="step-dot" aria-hidden="true">
+                        <svg width="12" height="12" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor"
+                             stroke-width="3" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </span>
+                    <span>Cart</span>
+                </div>
+
+                <span class="step-arrow" aria-hidden="true">→</span>
+
+                <div class="step completed">
+                    <span class="step-dot" aria-hidden="true">
+                        <svg width="12" height="12" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor"
+                             stroke-width="3" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </span>
+                    <span>Shipping</span>
+                </div>
+
+                <span class="step-arrow" aria-hidden="true">→</span>
+
+                <div class="step active" aria-current="step">
+                    <span class="step-dot">3</span>
+                    <span>Payment</span>
+                </div>
+
+                <span class="step-arrow" aria-hidden="true">→</span>
+
+                <div class="step">
+                    <span class="step-dot">4</span>
+                    <span>Complete</span>
+                </div>
+
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- ==========================================
+         MAIN CHECKOUT CONTENT
+         ========================================== -->
+
+    <div class="checkout-container">
+
+        <!-- ==========================================
+             LEFT COLUMN: BILLING & PAYMENT
+             ========================================== -->
+
+        <div class="main-column">
+
+            <!-- ==========================================
+                 BILLING & PAYMENT CARD
+                 ========================================== -->
+
+            <section class="checkout-card billing-section">
+
+                <div class="card-section-header">
+
+                    <h2 class="card-section-title">
+
+                        <svg width="20" height="20" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round"
+                             aria-hidden="true">
+                            <rect x="1" y="4" width="22" height="16"
+                                  rx="2" ry="2"></rect>
+                            <line x1="1" y1="10" x2="22" y2="10"></line>
+                        </svg>
+
+                        Billing &amp; Payment
+
+                    </h2>
+
+                    <p class="card-section-subtitle">
+                        Complete your payment securely
+                    </p>
+
+                </div>
+
+
+                <div class="card-body-custom billing-form">
+
+                    <!-- MAIN CHECKOUT FORM -->
+
+                    <form action="{% url 'process_order' %}"
+                          method="POST"
+                          id="checkout-form"
+                          data-status-url="{% url 'mpesa_status' 'CRID' %}">
+
+                        {% csrf_token %}
+
+
+                        <!-- ==========================================
+                             PAYMENT METHOD
+                             ========================================== -->
+
+                        <section class="payment-method"
+                                 aria-labelledby="payment-method-heading">
+
+                            <div class="pm-header">
+
+                                <h3 class="pm-title"
+                                    id="payment-method-heading">
+                                    Payment Method
+                                </h3>
+
+                                <p class="pm-subtitle">
+                                    Choose how you'd like to pay
+                                </p>
+
+                            </div>
+
+
+                            <!-- Payment Options -->
+
+                            <div class="pm-options"
+                                 role="radiogroup"
+                                 aria-labelledby="payment-method-heading">
+
+                                <!-- M-Pesa -->
+
+                                <label class="pm-option is-selected"
+                                       for="pm-mpesa">
+
+                                    <input type="radio"
+                                           name="payment_method"
+                                           value="mpesa"
+                                           id="pm-mpesa"
+                                           class="pm-radio"
+                                           checked
+                                           data-pm-option>
+
+                                    <span class="pm-radio-visual"
+                                          aria-hidden="true"></span>
+
+
+                                    <!-- M-Pesa Badge -->
+
+                                    <span class="pm-badge"
+                                          aria-hidden="true">
+
+                                        <span class="pm-badge-mark">
+                                            M
+                                        </span>
+
+                                        <span class="pm-badge-text">
+                                            PESA
+                                        </span>
+
+                                    </span>
+
+
+                                    <span class="pm-option-body">
+
+                                        <span class="pm-option-name">
+                                            M-Pesa
+                                        </span>
+
+                                        <span class="pm-option-desc">
+                                            Pay securely using M-Pesa STK Push
+                                        </span>
+
+                                    </span>
+
+
+                                    <svg class="pm-check"
+                                         width="18"
+                                         height="18"
+                                         viewBox="0 0 24 24"
+                                         fill="none"
+                                         stroke="currentColor"
+                                         stroke-width="3"
+                                         stroke-linecap="round"
+                                         stroke-linejoin="round"
+                                         aria-hidden="true">
+
+                                        <polyline points="20 6 9 17 4 12">
+                                        </polyline>
+
+                                    </svg>
+
+                                </label>
+
+
+                                <!-- Cash on Delivery -->
+
+                                <label class="pm-option"
+                                       for="pm-cod">
+
+                                    <input type="radio"
+                                           name="payment_method"
+                                           value="cash_on_delivery"
+                                           id="pm-cod"
+                                           class="pm-radio"
+                                           data-pm-option>
+
+                                    <span class="pm-radio-visual"
+                                          aria-hidden="true"></span>
+
+
+                                    <!-- Cash Badge -->
+
+                                    <span class="pm-badge"
+                                          aria-hidden="true">
+
+                                        <svg width="18"
+                                             height="18"
+                                             viewBox="0 0 24 24"
+                                             fill="none"
+                                             stroke="currentColor"
+                                             stroke-width="2"
+                                             stroke-linecap="round"
+                                             stroke-linejoin="round">
+
+                                            <rect x="2" y="6" width="20"
+                                                  height="12" rx="2"
+                                                  ry="2"></rect>
+
+                                            <circle cx="12" cy="12"
+                                                    r="2"></circle>
+
+                                            <path d="M6 6v.01M18 6v.01
+                                                     M6 18v-.01M18 18v-.01">
+                                            </path>
+
+                                        </svg>
+
+                                    </span>
+
+
+                                    <span class="pm-option-body">
+
+                                        <span class="pm-option-name">
+                                            Cash on Delivery
+                                        </span>
+
+                                        <span class="pm-option-desc">
+                                            Pay when your order is delivered
+                                        </span>
+
+                                    </span>
+
+
+                                    <svg class="pm-check"
+                                         width="18"
+                                         height="18"
+                                         viewBox="0 0 24 24"
+                                         fill="none"
+                                         stroke="currentColor"
+                                         stroke-width="3"
+                                         stroke-linecap="round"
+                                         stroke-linejoin="round"
+                                         aria-hidden="true">
+
+                                        <polyline points="20 6 9 17 4 12">
+                                        </polyline>
+
+                                    </svg>
+
+                                </label>
+
+
+                                <!-- Card Payment -->
+
+                                <label class="pm-option"
+                                       for="pm-card">
+
+                                    <input type="radio"
+                                           name="payment_method"
+                                           value="card"
+                                           id="pm-card"
+                                           class="pm-radio"
+                                           data-pm-option>
+
+                                    <span class="pm-radio-visual"
+                                          aria-hidden="true"></span>
+
+
+                                    <!-- Card Badge -->
+
+                                    <span class="pm-badge"
+                                          aria-hidden="true">
+
+                                        <svg width="18"
+                                             height="18"
+                                             viewBox="0 0 24 24"
+                                             fill="none"
+                                             stroke="currentColor"
+                                             stroke-width="2"
+                                             stroke-linecap="round"
+                                             stroke-linejoin="round">
+
+                                            <rect x="1" y="4" width="22"
+                                                  height="16" rx="2"
+                                                  ry="2"></rect>
+
+                                            <line x1="1" y1="10"
+                                                  x2="22" y2="10"></line>
+
+                                        </svg>
+
+                                    </span>
+
+
+                                    <span class="pm-option-body">
+
+                                        <span class="pm-option-name">
+                                            Card Payment
+                                        </span>
+
+                                        <span class="pm-option-desc">
+                                            Pay securely using your debit or credit card
+                                        </span>
+
+                                    </span>
+
+
+                                    <svg class="pm-check"
+                                         width="18"
+                                         height="18"
+                                         viewBox="0 0 24 24"
+                                         fill="none"
+                                         stroke="currentColor"
+                                         stroke-width="3"
+                                         stroke-linecap="round"
+                                         stroke-linejoin="round"
+                                         aria-hidden="true">
+
+                                        <polyline points="20 6 9 17 4 12">
+                                        </polyline>
+
+                                    </svg>
+
+                                </label>
+
+                            </div>
+
+
+                            <!-- ==========================================
+                                 M-PESA PHONE NUMBER
+                                 ========================================== -->
+
+                            <div class="pm-fields"
+                                 id="pm-mpesa-fields">
+
+                                <label class="pm-label"
+                                       for="id_mpesa_phone_number">
+
+                                    M-Pesa Phone Number
+
+                                </label>
+
+
+                                <div class="pm-input-wrap">
+
+                                    <span class="pm-input-prefix"
+                                          aria-hidden="true">
+
+                                        <svg width="16"
+                                             height="16"
+                                             viewBox="0 0 24 24"
+                                             fill="none"
+                                             stroke="currentColor"
+                                             stroke-width="2"
+                                             stroke-linecap="round"
+                                             stroke-linejoin="round">
+
+                                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+                                                     19.79 19.79 0 0 1-8.63-3.07
+                                                     19.5 19.5 0 0 1-6-6
+                                                     A19.79 19.79 0 0 1 2.09 4.18
+                                                     2 2 0 0 1 4.08 2h3a2 2 0 0 1
+                                                     2 1.72c.13.96.36 1.9.7 2.81
+                                                     a2 2 0 0 1-.45 2.11L8.09 9.91
+                                                     a16 16 0 0 0 6 6l1.27-1.27
+                                                     a2 2 0 0 1 2.11-.45
+                                                     c.9.34 1.85.57 2.81.7
+                                                     A2 2 0 0 1 22 16.92z">
+                                            </path>
+
+                                        </svg>
+
+                                    </span>
+
+
+                                    <input type="tel"
+                                           name="mpesa_phone_number"
+                                           id="id_mpesa_phone_number"
+                                           class="pm-input{% if payment_form.mpesa_phone_number.errors %} has-error{% endif %}"
+                                           placeholder="254712345678"
+                                           inputmode="numeric"
+                                           autocomplete="tel"
+                                           maxlength="20"
+                                           value="{{ payment_form.mpesa_phone_number.value|default_if_none:'' }}"
+                                           aria-describedby="pm-phone-help pm-phone-error"
+                                           {% if payment_form.mpesa_phone_number.errors %}aria-invalid="true"{% endif %}
+                                           required>
+
+                                </div>
+
+
+                                <p class="pm-help" id="pm-phone-help">
+
+                                    Enter the M-Pesa number that will receive
+                                    the payment prompt.
+
+                                    Format:
+                                    <strong>254712345678</strong>
+
+                                </p>
+
+
+                                <p class="pm-error"
+                                   id="pm-phone-error"
+                                   role="alert"
+                                   {% if not payment_form.mpesa_phone_number.errors %}hidden{% endif %}>
+
+                                    {% for error in payment_form.mpesa_phone_number.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+
+                                </p>
+
+                            </div>
+
+
+                            <!-- ==========================================
+                                 CASH ON DELIVERY INFO
+                                 ========================================== -->
+
+                            <div class="pm-fields"
+                                 id="pm-cod-fields"
+                                 hidden>
+
+                                <p class="pm-label">
+                                    Cash on Delivery
+                                </p>
+
+                                <p class="pm-help">
+                                    Pay in cash when your order is delivered.
+                                    Your order will be processed and delivered
+                                    without requiring online payment.
+                                </p>
+
+                            </div>
+
+
+                            <!-- ==========================================
+                                 CARD PAYMENT INFO
+                                 ========================================== -->
+
+                            <div class="pm-fields"
+                                 id="pm-card-fields"
+                                 hidden>
+
+                                <p class="pm-label">
+                                    Card Payment
+                                </p>
+
+                                <p class="pm-help">
+                                    Pay securely using your debit or credit
+                                    card. We're finishing card-payment setup —
+                                    this option isn't available to complete
+                                    checkout with just yet.
+                                </p>
+
+                            </div>
+
+
+                            <!-- ==========================================
+                                 LIVE PAYMENT STATUS
+                                 ========================================== -->
+
+                            <div class="pm-status"
+                                 id="pm-status"
+                                 hidden
+                                 role="status"
+                                 aria-live="polite">
+
+                                <span class="pm-spinner"
+                                      aria-hidden="true"></span>
+
+
+                                <div class="pm-status-body">
+
+                                    <p class="pm-status-title"
+                                       id="pm-status-title">
+
+                                        Sending M-Pesa payment request…
+
+                                    </p>
+
+
+                                    <p class="pm-status-text"
+                                       id="pm-status-text"></p>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- ==========================================
+                             SECURITY TRUST BADGE
+                             ========================================== -->
+
+                        <div class="security-badge">
+
+                            <svg class="security-icon"
+                                 width="20"
+                                 height="20"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+
+                                <rect x="3" y="11" width="18" height="11"
+                                      rx="2" ry="2"></rect>
+
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+
+                            </svg>
+
+
+                            <p class="security-text">
+
+                                <strong>Secure Checkout</strong>
+
+                                Your payment and billing information are
+                                handled securely through SokoHub's checkout
+                                process.
+
+                            </p>
+
+                        </div>
+
+
+                        <!-- ==========================================
+                             PRIMARY PAYMENT BUTTON
+                             ========================================== -->
+
+                        <button type="submit"
+                                class="btn-pay"
+                                id="btn-pay"
+                                data-amount-text="KES {{ totals }}">
+
+                            <span class="btn-pay-label">
+                                Pay Now — KES {{ totals }}
+                            </span>
+
+
+                            <svg width="18"
+                                 height="18"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2.5"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+
+                                <line x1="5" y1="12" x2="19" y2="12">
+                                </line>
+
+                                <polyline points="12 5 19 12 12 19">
+                                </polyline>
+
+                            </svg>
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==========================================
+                 SHIPPING INFORMATION CARD
+                 ========================================== -->
+
+            <section class="checkout-card shipping-section"
+                     style="margin-top: 1.5rem;">
+
+                <div class="card-section-header">
+
+                    <h2 class="card-section-title">
+
+                        <svg width="20"
+                             height="20"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2"
+                             stroke-linecap="round"
+                             stroke-linejoin="round"
+                             aria-hidden="true">
+
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13
+                                     a9 9 0 0 1 18 0z">
+                            </path>
+
+                            <circle cx="12" cy="10" r="3"></circle>
+
+                        </svg>
+
+                        Shipping Information
+
+                    </h2>
+
+
+                    <p class="card-section-subtitle">
+                        Your order will be delivered to:
+                    </p>
+
+                </div>
+
+
+                <div class="card-body-custom">
+
+                    <!-- Full Name -->
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+
+                            <svg width="14"
+                                 height="14"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8
+                                         a4 4 0 0 0-4 4v2">
+                                </path>
+
+                                <circle cx="12" cy="7" r="4"></circle>
+
+                            </svg>
+
+                            Full Name
+
+                        </span>
+
+
+                        <span class="info-value">
+                            {{ shipping_info.shipping_full_name }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+
+                            <svg width="14"
+                                 height="14"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12
+                                         c0 1.1-.9 2-2 2H4
+                                         c-1.1 0-2-.9-2-2V6
+                                         c0-1.1.9-2 2-2z">
+                                </path>
+
+                                <polyline points="22,6 12,13 2,6">
+                                </polyline>
+
+                            </svg>
+
+                            Email
+
+                        </span>
+
+
+                        <span class="info-value">
+                            {{ shipping_info.shipping_email }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- Delivery Address -->
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+
+                            <svg width="14"
+                                 height="14"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13
+                                         a9 9 0 0 1 18 0z">
+                                </path>
+
+                                <circle cx="12" cy="10" r="3"></circle>
+
+                            </svg>
+
+                            Delivery Address
+
+                        </span>
+
+
+                        <span class="info-value">
+
+                            {{ shipping_info.shipping_address1 }}
+
+                            {% if shipping_info.shipping_address2 %}
+                                <br>
+                                {{ shipping_info.shipping_address2 }}
+                            {% endif %}
+
+                            <br>
+                            {{ shipping_info.shipping_city }},
+                            {{ shipping_info.shipping_state }}
+
+                            <br>
+                            {{ shipping_info.shipping_zipcode }}
+
+                            <br>
+                            {{ shipping_info.shipping_country }}
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- Edit Shipping Information -->
+
+                    <div style="margin-top: 1.25rem;">
+
+                        <a href="{% url 'update_info' %}"
+                           class="btn-secondary-outline">
+
+                            <svg width="16"
+                                 height="16"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14
+                                         a2 2 0 0 0 2 2h14
+                                         a2 2 0 0 0 2-2v-7">
+                                </path>
+
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3
+                                         L12 15l-4 1 1-4 9.5-9.5z">
+                                </path>
+
+                            </svg>
+
+                            Edit Shipping Information
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- ==========================================
+             RIGHT COLUMN: ORDER SUMMARY
+             ========================================== -->
+
+        <aside class="order-sidebar">
+
+            <section class="checkout-card">
+
+                <div class="card-section-header">
+
+                    <h2 class="card-section-title">
+
+                        <svg width="20"
+                             height="20"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2"
+                             stroke-linecap="round"
+                             stroke-linejoin="round"
+                             aria-hidden="true">
+
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14
+                                     a2 2 0 0 0 2-2V6l-3-4z">
+                            </path>
+
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+
+                        </svg>
+
+                        Your Order
+
+                    </h2>
+
+                </div>
+
+
+                <div class="card-body-custom">
+
+                    {% if cart_products %}
+
+                        <!-- Cart Items -->
+
+                        {% for product in cart_products %}
+
+                            <div class="order-item">
+
+                                {% if product.image %}
+
+                                    <img src="{{ product.image.url }}"
+                                         alt="{{ product.name }}"
+                                         class="item-image"
+                                         loading="lazy">
+
+                                {% else %}
+
+                                    <div class="item-image-placeholder"
+                                         aria-hidden="true">
+
+                                        <svg width="20"
+                                             height="20"
+                                             viewBox="0 0 24 24"
+                                             fill="none"
+                                             stroke="currentColor"
+                                             stroke-width="2"
+                                             stroke-linecap="round"
+                                             stroke-linejoin="round">
+
+                                            <rect x="3"
+                                                  y="3"
+                                                  width="18"
+                                                  height="18"
+                                                  rx="2"
+                                                  ry="2">
+                                            </rect>
+
+                                            <circle cx="8.5"
+                                                    cy="8.5"
+                                                    r="1.5">
+                                            </circle>
+
+                                            <polyline points="21 15 16 10 5 21">
+                                            </polyline>
+
+                                        </svg>
+
+                                    </div>
+
+                                {% endif %}
+
+
+                                <div class="item-details">
+
+                                    <div class="item-name">
+                                        {{ product.name }}
+                                    </div>
+
+
+                                    <div class="item-meta">
+
+                                        <span class="item-qty">
+
+                                            {% for key, value in quantities.items %}
+
+                                                {% if key == product.id|slugify %}
+                                                    Qty {{ value }}
+                                                {% endif %}
+
+                                            {% endfor %}
+
+                                        </span>
+
+
+                                        <span class="item-price
+                                                     {% if product.is_sale %}item-sale{% endif %}">
+
+                                            {% if product.is_sale %}
+
+                                                KES {{ product.sale_price }}
+
+                                            {% else %}
+
+                                                KES {{ product.price }}
+
+                                            {% endif %}
+
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+
+
+                        <!-- Order Total -->
+
+                        <div class="order-total">
+
+                            <div class="total-row">
+
+                                <span class="total-label">
+                                    Order Total
+                                </span>
+
+                                <span class="total-amount">
+                                    KES {{ totals }}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Edit Cart -->
+
+                        <a href="{% url 'cart_summary' %}"
+                           class="btn-tertiary">
+
+                            <svg width="16"
+                                 height="16"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+
+                                <line x1="19"
+                                      y1="12"
+                                      x2="5"
+                                      y2="12">
+                                </line>
+
+                                <polyline points="12 19 5 12 12 5">
+                                </polyline>
+
+                            </svg>
+
+                            Edit Cart
+
+                        </a>
+
+                    {% else %}
+
+                        <!-- Empty Cart -->
+
+                        <div class="empty-state">
+
+                            <div class="empty-state-icon"
+                                 aria-hidden="true">
+
+                                <svg width="40"
+                                     height="40"
+                                     viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor"
+                                     stroke-width="1.5"
+                                     stroke-linecap="round"
+                                     stroke-linejoin="round">
+
+                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14
+                                             a2 2 0 0 0 2-2V6l-3-4z">
+                                    </path>
+
+                                    <line x1="3" y1="6" x2="21" y2="6">
+                                    </line>
+
+                                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+
+                                </svg>
+
+                            </div>
+
+
+                            <p class="empty-state-title">
+                                Your cart is empty
+                            </p>
+
+
+                            <p class="empty-state-text">
+                                Add some items to your cart to proceed
+                                with checkout.
+                            </p>
+
+
+                            <a href="{% url 'cart_summary' %}"
+                               class="btn-secondary-outline">
+
+                                Return to Cart
+
+                            </a>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </section>
+
+        </aside>
+
+    </div>
+
+</div>
+
+
+<!-- ==========================================
+     M-PESA CHECKOUT JAVASCRIPT
+     ========================================== -->
+
+<script src="{% static 'js/mpesa_checkout.js' %}" defer></script>
+
+{% endblock %}
