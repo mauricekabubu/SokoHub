@@ -1,0 +1,234 @@
+/* ==========================================================================
+   SokoHub — M-Pesa payment method section
+   Additive only. Every selector is scoped under .payment-method / .pm-* so
+   nothing in billing_info.css is overridden.
+   Colours inherit from your existing tokens where available.
+   ========================================================================== */
+
+.payment-method {
+  --pm-green: #4caf50;
+  --pm-green-dark: #2e7d32;
+  --pm-border: var(--checkout-border, #e3e8ef);
+  --pm-muted: var(--checkout-muted, #667085);
+  --pm-text: var(--checkout-text, #1d2939);
+  --pm-danger: #d92d20;
+  --pm-radius: 12px;
+
+  margin: 1.75rem 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--pm-border);
+}
+
+.pm-header { margin-bottom: 1rem; }
+
+.pm-title {
+  margin: 0 0 .25rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--pm-text);
+}
+
+.pm-subtitle {
+  margin: 0;
+  font-size: .875rem;
+  color: var(--pm-muted);
+}
+
+/* ---------------------------------------------------------------- option */
+
+.pm-options { display: grid; gap: .75rem; }
+
+.pm-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .875rem;
+  padding: 1rem;
+  border: 1.5px solid var(--pm-border);
+  border-radius: var(--pm-radius);
+  background: #fff;
+  cursor: pointer;
+}
+
+.pm-option.is-selected {
+  border-color: var(--pm-green);
+  background: rgba(76, 175, 80, .04);
+}
+
+/* Keep the real radio reachable by keyboard and screen readers. */
+.pm-radio {
+  position: absolute;
+  opacity: 0;
+  width: 1px; height: 1px;
+  margin: 0;
+}
+
+.pm-radio-visual {
+  flex: 0 0 auto;
+  width: 20px; height: 20px;
+  border: 2px solid #c3ccd9;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+}
+
+.pm-option.is-selected .pm-radio-visual { border-color: var(--pm-green); }
+
+.pm-option.is-selected .pm-radio-visual::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--pm-green);
+}
+
+/* Visible focus ring driven by the hidden input. */
+.pm-radio:focus-visible + .pm-radio-visual {
+  outline: 2px solid var(--pm-green-dark);
+  outline-offset: 3px;
+}
+
+/* CSS-only M-Pesa badge — no external image. */
+.pm-badge {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: .3rem .5rem;
+  border-radius: 6px;
+  background: var(--pm-green);
+  color: #fff;
+  font-weight: 700;
+  font-size: .75rem;
+  letter-spacing: .04em;
+  line-height: 1;
+}
+
+.pm-badge-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px; height: 16px;
+  border-radius: 4px;
+  background: #fff;
+  color: var(--pm-green-dark);
+  font-size: .7rem;
+  font-weight: 800;
+}
+
+.pm-option-body { display: flex; flex-direction: column; gap: .15rem; min-width: 0; }
+.pm-option-name { font-weight: 600; font-size: .9375rem; color: var(--pm-text); }
+.pm-option-desc { font-size: .8125rem; color: var(--pm-muted); }
+
+.pm-check { margin-left: auto; color: var(--pm-green); opacity: 0; flex: 0 0 auto; }
+.pm-option.is-selected .pm-check { opacity: 1; }
+
+/* ---------------------------------------------------------------- fields */
+
+.pm-fields { margin-top: 1.125rem; }
+
+.pm-label {
+  display: block;
+  margin-bottom: .4rem;
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--pm-text);
+}
+
+.pm-input-wrap { position: relative; display: flex; align-items: center; }
+
+.pm-input-prefix {
+  position: absolute;
+  left: .875rem;
+  display: inline-flex;
+  color: var(--pm-muted);
+  pointer-events: none;
+}
+
+.pm-input {
+  width: 100%;
+  padding: .75rem .875rem .75rem 2.5rem;
+  font-size: .9375rem;
+  color: var(--pm-text);
+  border: 1.5px solid var(--pm-border);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.pm-input::placeholder { color: #9aa4b2; }
+
+.pm-input:focus {
+  outline: none;
+  border-color: var(--pm-green);
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, .18);
+}
+
+.pm-input.has-error { border-color: var(--pm-danger); }
+.pm-input.has-error:focus { box-shadow: 0 0 0 3px rgba(217, 45, 32, .15); }
+
+.pm-help { margin: .4rem 0 0; font-size: .8125rem; color: var(--pm-muted); }
+.pm-help strong { color: var(--pm-text); font-weight: 600; }
+
+.pm-error {
+  margin: .4rem 0 0;
+  font-size: .8125rem;
+  font-weight: 500;
+  color: var(--pm-danger);
+}
+
+.pm-error[hidden] { display: none; }
+
+/* ---------------------------------------------------------------- status */
+
+.pm-status {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  margin-top: 1.125rem;
+  padding: .9375rem 1rem;
+  border: 1.5px solid var(--pm-border);
+  border-left-width: 4px;
+  border-left-color: var(--pm-green);
+  border-radius: 10px;
+  background: rgba(76, 175, 80, .05);
+}
+
+.pm-status[hidden] { display: none; }
+
+.pm-status.is-error {
+  border-left-color: var(--pm-danger);
+  background: rgba(217, 45, 32, .05);
+}
+
+.pm-status.is-error .pm-spinner { display: none; }
+
+.pm-status-title { margin: 0; font-size: .9375rem; font-weight: 600; color: var(--pm-text); }
+.pm-status-text  { margin: .2rem 0 0; font-size: .8125rem; color: var(--pm-muted); }
+.pm-status-text:empty { display: none; }
+
+.pm-spinner {
+  flex: 0 0 auto;
+  width: 18px; height: 18px;
+  margin-top: 1px;
+  border: 2px solid rgba(76, 175, 80, .25);
+  border-top-color: var(--pm-green);
+  border-radius: 50%;
+  animation: pm-spin .8s linear infinite;
+}
+
+@keyframes pm-spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .pm-spinner { animation: none; border-top-color: rgba(76, 175, 80, .25); }
+}
+
+/* Disabled Pay Now while a payment is in flight. */
+.btn-pay[disabled] { opacity: .65; cursor: not-allowed; }
+
+/* ------------------------------------------------------------ responsive */
+
+@media (max-width: 480px) {
+  .pm-option { flex-wrap: wrap; padding: .875rem; gap: .625rem; }
+  .pm-option-body { flex: 1 1 100%; order: 3; }
+  .pm-check { order: 2; }
+}

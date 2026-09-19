@@ -1,0 +1,543 @@
+/* SokoHub — Contact Us page.
+   Scoped under .contact-page so nothing here touches the navbar, footer,
+   or other pages. Tokens (colors, radius, spacing) match the rest of the
+   checkout/success flow so this reads as the same product. */
+
+.contact-page {
+    --sh-green: #1a9f5c;
+    --sh-green-dark: #158450;
+    --sh-green-tint: #e7f7ee;
+    --sh-text: #111827;
+    --sh-text-muted: #6b7280;
+    --sh-border: #e6e8eb;
+    --sh-border-soft: #eceef1;
+    --sh-surface: #fafbfc;
+    --sh-surface-alt: #f7f8fa;
+    --sh-radius-lg: 16px;
+    --sh-radius-md: 12px;
+    --sh-radius-sm: 10px;
+
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                 Roboto, Helvetica, Arial, sans-serif;
+    color: var(--sh-text);
+    background: #ffffff;
+}
+
+.contact-page .container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.contact-page section,
+.contact-page header {
+    scroll-margin-top: 1rem;
+}
+
+/* -------------------------------------------------------------- breadcrumb */
+
+.contact-breadcrumb-wrap {
+    padding-top: 1.5rem;
+}
+
+.contact-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--sh-text-muted);
+}
+
+.contact-breadcrumb a {
+    color: var(--sh-text-muted);
+    text-decoration: none;
+}
+
+.contact-breadcrumb a:hover {
+    color: var(--sh-text);
+    text-decoration: underline;
+}
+
+.contact-breadcrumb [aria-current="page"] {
+    color: var(--sh-text);
+    font-weight: 500;
+}
+
+/* -------------------------------------------------------------------- hero */
+
+.contact-hero {
+    padding: 1.75rem 0 2.5rem;
+    text-align: center;
+}
+
+.contact-eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sh-green);
+    margin-bottom: 0.75rem;
+}
+
+.contact-heading {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 0.75rem;
+}
+
+.contact-subtitle {
+    max-width: 560px;
+    margin: 0 auto;
+    color: var(--sh-text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* --------------------------------------------------------------- info cards */
+
+.contact-info-section {
+    padding-bottom: 2.5rem;
+}
+
+.contact-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+
+.contact-info-card {
+    background: #ffffff;
+    border: 1px solid var(--sh-border);
+    border-radius: var(--sh-radius-md);
+    padding: 1.5rem;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.contact-info-card:hover {
+    border-color: #d7dbe0;
+    box-shadow: 0 2px 8px rgba(16, 24, 40, 0.05);
+}
+
+.contact-info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--sh-green-tint);
+    color: var(--sh-green);
+    margin-bottom: 1rem;
+}
+
+.contact-info-title {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    margin: 0 0 0.4rem;
+}
+
+.contact-info-desc {
+    font-size: 0.875rem;
+    color: var(--sh-text-muted);
+    line-height: 1.55;
+    margin: 0 0 0.75rem;
+}
+
+.contact-info-meta {
+    display: inline-block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--sh-text);
+}
+
+.contact-info-link {
+    color: var(--sh-green);
+    text-decoration: none;
+}
+
+.contact-info-link:hover {
+    text-decoration: underline;
+}
+
+/* --------------------------------------------------------------- main grid */
+
+.contact-main-section {
+    padding: 1.5rem 0 3rem;
+}
+
+.contact-main-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 1.75rem;
+    align-items: start;
+}
+
+/* ------------------------------------------------------------------- form */
+
+.contact-form-card {
+    background: #ffffff;
+    border: 1px solid var(--sh-border);
+    border-radius: var(--sh-radius-lg);
+    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.05);
+    padding: 2rem;
+}
+
+.contact-form-heading {
+    font-size: 1.375rem;
+    font-weight: 700;
+    margin: 0 0 0.35rem;
+}
+
+.contact-form-subtitle {
+    font-size: 0.9375rem;
+    color: var(--sh-text-muted);
+    margin: 0 0 1.5rem;
+}
+
+.contact-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.contact-form-field {
+    margin-bottom: 1.25rem;
+}
+
+.contact-form-label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--sh-text);
+    margin-bottom: 0.4rem;
+}
+
+.contact-form-optional {
+    font-weight: 400;
+    color: var(--sh-text-muted);
+}
+
+.contact-form-input {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid var(--sh-border);
+    border-radius: var(--sh-radius-sm);
+    padding: 0.7rem 0.85rem;
+    font-size: 0.9375rem;
+    color: var(--sh-text);
+    background: #ffffff;
+    font-family: inherit;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.contact-form-input::placeholder {
+    color: #9ca3af;
+}
+
+.contact-form-input:focus {
+    outline: none;
+    border-color: var(--sh-green);
+    box-shadow: 0 0 0 3px rgba(26, 159, 92, 0.15);
+}
+
+.contact-form-input:invalid:not(:placeholder-shown):not(:focus) {
+    border-color: #dc2626;
+}
+
+.contact-form-textarea {
+    resize: vertical;
+    min-height: 140px;
+}
+
+.contact-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.85rem 1.5rem;
+    border-radius: var(--sh-radius-sm);
+    background: var(--sh-green);
+    color: #ffffff;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--sh-green);
+    cursor: pointer;
+    transition: background-color 150ms ease, transform 150ms ease;
+}
+
+.contact-btn-primary:hover,
+.contact-btn-primary:focus-visible {
+    background: var(--sh-green-dark);
+}
+
+.contact-btn-primary:active {
+    transform: translateY(1px);
+}
+
+.contact-btn-primary:focus-visible {
+    outline: 2px solid var(--sh-green);
+    outline-offset: 2px;
+}
+
+.contact-form-reassurance {
+    text-align: center;
+    font-size: 0.8125rem;
+    color: var(--sh-text-muted);
+    margin: 0.85rem 0 0;
+}
+
+/* --------------------------------------------------------------------- faq */
+
+.contact-faq-panel {
+    background: var(--sh-surface);
+    border: 1px solid var(--sh-border-soft);
+    border-radius: var(--sh-radius-lg);
+    padding: 1.75rem;
+}
+
+.contact-faq-heading {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+}
+
+.contact-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.contact-faq-item {
+    background: #ffffff;
+    border: 1px solid var(--sh-border-soft);
+    border-radius: var(--sh-radius-sm);
+    padding: 0;
+    overflow: hidden;
+}
+
+.contact-faq-question {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--sh-text);
+    cursor: pointer;
+}
+
+.contact-faq-question::-webkit-details-marker {
+    display: none;
+}
+
+.contact-faq-icon {
+    position: relative;
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+}
+
+.contact-faq-icon::before,
+.contact-faq-icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: var(--sh-text-muted);
+    transform: translate(-50%, -50%);
+    transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.contact-faq-icon::before {
+    width: 10px;
+    height: 2px;
+}
+
+.contact-faq-icon::after {
+    width: 2px;
+    height: 10px;
+}
+
+.contact-faq-item[open] .contact-faq-icon::after {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.contact-faq-answer {
+    margin: 0;
+    padding: 0 1rem 0.95rem;
+    font-size: 0.8438rem;
+    color: var(--sh-text-muted);
+    line-height: 1.55;
+}
+
+.contact-faq-cta {
+    display: block;
+    text-align: center;
+    margin-top: 1.25rem;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--sh-border);
+    border-radius: var(--sh-radius-sm);
+    background: #ffffff;
+    color: var(--sh-text);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.contact-faq-cta:hover {
+    border-color: #d7dbe0;
+    background: var(--sh-surface-alt);
+}
+
+/* --------------------------------------------------------------- order banner */
+
+.contact-order-banner {
+    background: var(--sh-green-tint);
+    padding: 2rem 0;
+}
+
+.contact-order-banner-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.contact-order-banner-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 0.35rem;
+}
+
+.contact-order-banner-subtitle {
+    font-size: 0.9375rem;
+    color: #235c3f;
+    margin: 0;
+    max-width: 480px;
+}
+
+.contact-order-banner-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.contact-order-banner-actions .contact-btn-primary {
+    width: auto;
+    padding: 0.75rem 1.5rem;
+}
+
+.contact-order-banner-link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--sh-text);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------- trust */
+
+.contact-trust-section {
+    padding: 3rem 0;
+}
+
+.contact-trust-heading {
+    text-align: center;
+    font-size: 1.375rem;
+    font-weight: 700;
+    margin: 0 0 2rem;
+}
+
+.contact-trust-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+}
+
+.contact-trust-item {
+    text-align: center;
+}
+
+.contact-trust-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--sh-surface-alt);
+    color: var(--sh-green);
+    margin-bottom: 0.85rem;
+}
+
+.contact-trust-title {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    margin: 0 0 0.35rem;
+}
+
+.contact-trust-text {
+    font-size: 0.8438rem;
+    color: var(--sh-text-muted);
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* ---------------------------------------------------------------- responsive */
+
+@media (max-width: 900px) {
+    .contact-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-main-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-trust-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .contact-order-banner-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 560px) {
+    .contact-heading {
+        font-size: 1.75rem;
+    }
+
+    .contact-form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .contact-form-card {
+        padding: 1.5rem;
+    }
+
+    .contact-faq-panel {
+        padding: 1.25rem;
+    }
+
+    .contact-order-banner-actions {
+        width: 100%;
+    }
+
+    .contact-order-banner-actions .contact-btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+}

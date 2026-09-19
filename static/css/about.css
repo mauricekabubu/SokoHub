@@ -1,0 +1,196 @@
+/* =========================================================
+   Hero variant
+   ========================================================= */
+.sh-about-title { max-width: 11ch; }
+.sh-about-collage {
+  position: relative;
+  z-index: 1;
+  width: min(300px, 70%);
+  aspect-ratio: 1;
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green);
+  box-shadow: var(--shadow-hover);
+}
+.sh-float-chip {
+  position: absolute;
+  z-index: 2;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 9px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--green-dark);
+  box-shadow: var(--shadow-hover);
+  white-space: nowrap;
+}
+.sh-float-chip-1 { top: 6%; left: 0%; }
+.sh-float-chip-2 { bottom: 22%; right: -2%; }
+.sh-float-chip-3 { bottom: 2%; left: 8%; }
+
+/* =========================================================
+   Our story
+   ========================================================= */
+.sh-story-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 48px;
+  align-items: center;
+}
+.sh-story-visual {
+  aspect-ratio: 1;
+  border-radius: var(--radius-lg);
+  background: var(--sage);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sh-story-visual-inner {
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green-dark);
+}
+.sh-body-text {
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 56ch;
+  margin: 0 0 14px;
+}
+
+/* Kenya cards can sit 3-up even on a wider breakpoint */
+.sh-kenya-grid { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 720px) {
+  .sh-kenya-grid { grid-template-columns: 1fr; }
+}
+
+/* =========================================================
+   Mission & vision
+   ========================================================= */
+.sh-mission-vision {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.sh-mv-panel {
+  padding: 72px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sh-mv-mission { background: var(--sage); }
+.sh-mv-vision { background: var(--cream); }
+.sh-mv-inner { max-width: 40ch; }
+.sh-mv-inner h2 { margin: 6px 0 14px; }
+
+@media (max-width: 900px) {
+  .sh-mission-vision { grid-template-columns: 1fr; }
+  .sh-mv-panel { padding: 48px 24px; }
+}
+
+/* =========================================================
+   How it works — timeline
+   ========================================================= */
+.sh-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+}
+.sh-timeline::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 6%;
+  right: 6%;
+  height: 1px;
+  background: var(--border);
+  z-index: 0;
+}
+.sh-timeline-step {
+  position: relative;
+  z-index: 1;
+  background: var(--white);
+}
+.sh-timeline-num {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--green-dark);
+  background: var(--green-light);
+  border-radius: 999px;
+  width: 38px;
+  height: 38px;
+  line-height: 38px;
+  text-align: center;
+  font-size: 0.86rem;
+  margin-bottom: 14px;
+}
+.sh-timeline-step h4 { margin: 0 0 4px; font-size: 1rem; }
+.sh-timeline-step p { margin: 0; color: var(--muted); font-size: 0.88rem; }
+
+@media (max-width: 800px) {
+  .sh-timeline { grid-template-columns: 1fr; gap: 28px; }
+  .sh-timeline::before { top: 0; bottom: 0; left: 18px; right: auto; width: 1px; height: auto; }
+  .sh-timeline-step { padding-left: 52px; }
+  .sh-timeline-num { position: absolute; left: 0; top: 0; }
+}
+
+/* =========================================================
+   Values grid
+   ========================================================= */
+.sh-values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.sh-value-item .sh-cat-icon {
+  width: 52px; height: 52px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  margin: 0 0 14px;
+}
+.sh-value-item h4 { margin: 0 0 4px; font-size: 1rem; }
+.sh-value-item p { margin: 0; color: var(--muted); font-size: 0.88rem; }
+
+@media (max-width: 900px) {
+  .sh-values-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .sh-values-grid { grid-template-columns: 1fr; }
+}
+
+/* =========================================================
+   CTA banner
+   ========================================================= */
+.sh-about-cta {
+  background: var(--green);
+  color: var(--white);
+  text-align: center;
+  padding: 64px 0;
+}
+.sh-about-cta h2 { color: var(--white); margin: 0 0 10px; }
+.sh-about-cta p { color: rgba(255,255,255,0.85); margin: 0 0 26px; }
+
+/* =========================================================
+   Scroll reveal (one subtle entrance per section, not per element)
+   ========================================================= */
+.sh-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.sh-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .sh-reveal { opacity: 1; transform: none; }
+}

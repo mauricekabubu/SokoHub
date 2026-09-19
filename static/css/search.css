@@ -1,0 +1,114 @@
+/* =========================================================
+   Search hero
+   ========================================================= */
+.sh-search-hero {
+  background: linear-gradient(180deg, var(--sage) 0%, var(--cream) 100%);
+  padding: 56px 0 44px;
+  text-align: center;
+}
+.sh-search-hero-inner { max-width: 640px; margin: 0 auto; }
+.sh-search-title {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  margin: 0 0 10px;
+}
+.sh-search-subtitle {
+  color: var(--muted);
+  margin: 0 0 28px;
+}
+
+/* =========================================================
+   Search form
+   ========================================================= */
+.sh-search-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.sh-search-input-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 260px;
+}
+.sh-search-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+}
+.sh-search-input {
+  width: 100%;
+  height: 56px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0 20px 0 50px;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  background: var(--white);
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.sh-search-input:focus-visible,
+.sh-search-input:focus {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 4px rgba(63, 125, 74, 0.14);
+}
+.sh-search-btn {
+  height: 56px;
+  padding: 0 30px;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 560px) {
+  .sh-search-form { flex-direction: column; }
+  .sh-search-btn { width: 100%; justify-content: center; }
+}
+
+/* =========================================================
+   Results toolbar (mirrors category.css so search stands alone)
+   ========================================================= */
+.sh-category-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 32px 0 28px;
+}
+.sh-category-toolbar h2 { margin: 0 0 4px; font-size: 1.4rem; }
+.sh-category-toolbar p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+.sh-category-count {
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+  background: var(--cream);
+  padding: 7px 14px;
+  border-radius: 999px;
+}
+.sh-category-grid { padding-bottom: 64px; }
+.sh-category-grid .sh-product-card {
+  animation: sh-search-fade-in 0.4s var(--ease) backwards;
+}
+@keyframes sh-search-fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sh-category-grid .sh-product-card { animation: none; }
+}
+
+/* =========================================================
+   Empty / no-results state
+   ========================================================= */
+.sh-search-empty {
+  text-align: center;
+  padding: 80px 20px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+.sh-search-empty-icon { font-size: 2.6rem; display: block; margin-bottom: 18px; }
+.sh-search-empty h2 { margin: 0 0 10px; font-size: 1.4rem; }
+.sh-search-empty p { color: var(--muted); line-height: 1.6; margin: 0; }

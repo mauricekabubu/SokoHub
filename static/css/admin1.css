@@ -1,0 +1,295 @@
+/* =========================================================
+   SokoHub Admin — namespaced under .sh-admin so it never
+   leaks into the customer-facing templates.
+   ========================================================= */
+.sh-admin {
+  padding: 32px 0 72px;
+  animation: sh-admin-fade-in 0.4s var(--ease);
+}
+@keyframes sh-admin-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Breadcrumb */
+.sh-admin-breadcrumb ol {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  margin: 0 0 18px;
+  padding: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.sh-admin-breadcrumb li:not(:last-child)::after { content: "/"; margin-left: 8px; color: var(--border); }
+.sh-admin-breadcrumb li[aria-current="page"] { color: var(--green-dark); font-weight: 600; }
+
+/* Header */
+.sh-admin-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.sh-admin-header h1 {
+  font-size: 1.7rem;
+  margin: 0 0 4px;
+}
+.sh-admin-header p {
+  color: var(--muted);
+  margin: 0;
+  font-size: 0.94rem;
+}
+.sh-admin-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-weight: 600;
+  font-size: 0.84rem;
+  padding: 8px 16px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.sh-admin-status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  display: inline-block;
+}
+
+/* Summary card */
+.sh-admin-summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  margin-bottom: 28px;
+  max-width: 380px;
+}
+.sh-admin-summary-icon {
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.sh-admin-summary-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
+}
+.sh-admin-summary-label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-top: 2px;
+}
+
+/* Card wrapper */
+.sh-admin-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* =========================================================
+   Table (desktop / tablet)
+   ========================================================= */
+.sh-admin-table-wrap { overflow-x: auto; }
+.sh-admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.sh-admin-table th {
+  text-align: left;
+  padding: 14px 20px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.sh-admin-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.sh-admin-table tbody tr:last-child td { border-bottom: none; }
+.sh-admin-table tbody tr {
+  transition: background 0.15s var(--ease);
+}
+.sh-admin-table tbody tr:hover { background: var(--green-light); }
+
+.sh-admin-order-link {
+  font-weight: 600;
+  color: var(--green-dark);
+  font-family: var(--font-display);
+}
+.sh-admin-order-link:hover { text-decoration: underline; }
+
+.sh-admin-amount {
+  font-weight: 700;
+  color: var(--text);
+  font-family: var(--font-display);
+}
+.sh-admin-amount-lg { font-size: 1.15rem; }
+
+.sh-admin-customer { display: flex; align-items: center; gap: 10px; }
+.sh-admin-avatar {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--sage);
+  color: var(--green-dark);
+  font-weight: 700;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.sh-admin-date { color: var(--muted); white-space: nowrap; }
+
+.sh-admin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.sh-admin-badge-shipped {
+  background: var(--green-light);
+  color: var(--green-dark);
+}
+.sh-admin-badge-shipped span { font-size: 0.6rem; }
+.sh-admin-badge-pending {
+  background: #FDF0DF;
+  color: #B4680B;
+}
+.sh-admin-badge-pending span { font-size: 0.6rem; }
+
+/* Header status badge — amber variant for the pending dashboard */
+.sh-admin-status-badge-pending {
+  background: #FDF0DF;
+  color: #B4680B;
+}
+.sh-admin-status-badge-pending .sh-admin-status-dot { background: #E08A1E; }
+
+/* Summary icon — amber variant */
+.sh-admin-summary-icon-pending {
+  background: #FDF0DF;
+  color: #B4680B;
+}
+
+/* Primary "Mark Shipped" action */
+.sh-admin-ship-btn {
+  border: 1px solid var(--green);
+  background: var(--green);
+  color: var(--white);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.18s var(--ease), transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
+}
+.sh-admin-ship-btn:hover {
+  background: var(--green-dark);
+  border-color: var(--green-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-rest);
+}
+.sh-admin-ship-btn:focus-visible { outline: 2px solid var(--green-dark); outline-offset: 2px; }
+.sh-admin-ship-btn-block { width: 100%; padding: 12px 14px; }
+
+.sh-admin-unship-form { margin: 0; }
+.sh-admin-unship-btn {
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: #B3261E;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.18s var(--ease), border-color 0.18s var(--ease), transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
+}
+.sh-admin-unship-btn:hover {
+  background: #FBEAEA;
+  border-color: #E7B3AE;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-rest);
+}
+.sh-admin-unship-btn:focus-visible { outline: 2px solid #B3261E; outline-offset: 2px; }
+.sh-admin-unship-btn-block { width: 100%; padding: 11px 14px; }
+
+/* =========================================================
+   Mobile order cards (hidden on desktop/tablet)
+   ========================================================= */
+.sh-admin-cards { display: none; }
+.sh-admin-order-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: box-shadow 0.18s var(--ease), transform 0.18s var(--ease);
+}
+.sh-admin-order-card:hover { box-shadow: var(--shadow-rest); transform: translateY(-2px); }
+.sh-admin-order-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.sh-admin-unship-form-block { margin-top: 4px; }
+
+/* =========================================================
+   Empty state
+   ========================================================= */
+.sh-admin-empty {
+  text-align: center;
+  padding: 80px 20px;
+  max-width: 380px;
+  margin: 0 auto;
+}
+.sh-admin-empty-icon { font-size: 2.6rem; display: block; margin-bottom: 16px; }
+.sh-admin-empty h2 { margin: 0 0 8px; font-size: 1.2rem; }
+.sh-admin-empty p { color: var(--muted); margin: 0; font-size: 0.92rem; }
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 900px) {
+  .sh-admin-table-wrap { display: none; }
+  .sh-admin-cards { display: block; }
+}
+@media (max-width: 480px) {
+  .sh-admin-header { flex-direction: column; align-items: flex-start; }
+  .sh-admin-summary { max-width: none; }
+}

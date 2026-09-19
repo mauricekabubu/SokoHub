@@ -1,0 +1,290 @@
+/* SokoHub — payment success page.
+   Scoped entirely under .success-page so nothing here can leak into or
+   override unrelated site styles. */
+
+.success-page {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 1rem;
+    background: #f7f8fa;
+    min-height: 60vh;
+}
+
+.success-container {
+    width: 100%;
+    max-width: 560px;
+}
+
+.success-card {
+    background: #ffffff;
+    border: 1px solid #e6e8eb;
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.06);
+    padding: 2.5rem 2rem;
+    text-align: center;
+}
+
+/* ---------------------------------------------------------- success icon */
+
+.success-icon-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+}
+
+.success-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #e7f7ee;
+    color: #1a9f5c;
+    animation: success-pop 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes success-pop {
+    0% {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .success-icon {
+        animation: none;
+    }
+}
+
+/* -------------------------------------------------------- heading / copy */
+
+.success-heading {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 0.5rem;
+    line-height: 1.25;
+}
+
+.success-message {
+    font-size: 1rem;
+    color: #4b5563;
+    line-height: 1.55;
+    margin: 0 0 2rem;
+}
+
+/* -------------------------------------------------------- summary card */
+
+.order-summary-card {
+    text-align: left;
+    background: #fafbfc;
+    border: 1px solid #eceef1;
+    border-radius: 12px;
+    padding: 1.25rem 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.summary-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0;
+}
+
+.summary-row + .summary-row {
+    border-top: 1px solid #eceef1;
+}
+
+.summary-label {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.summary-value {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #111827;
+    text-align: right;
+}
+
+.summary-value-success {
+    color: #1a9f5c;
+}
+
+/* -------------------------------------------------------------- receipt */
+
+.receipt-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    background: #f0faf4;
+    border: 1px solid #cdeedd;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.receipt-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #1a9f5c;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.receipt-value {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: #0f2e1f;
+    letter-spacing: 0.02em;
+    word-break: break-all;
+}
+
+/* ---------------------------------------------------------------- amount */
+
+.amount-block {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border: 1px solid #eceef1;
+    border-radius: 12px;
+    margin-bottom: 1.75rem;
+}
+
+.amount-label {
+    font-size: 0.9375rem;
+    color: #4b5563;
+    font-weight: 500;
+}
+
+.amount-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+/* -------------------------------------------------------------- next steps */
+
+.next-steps {
+    text-align: left;
+    background: #f7f8fa;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.next-steps-title {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 0.25rem;
+}
+
+.next-steps-text {
+    font-size: 0.875rem;
+    color: #6b7280;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ----------------------------------------------------------------- actions */
+
+.success-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.btn-continue-shopping {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.85rem 1.5rem;
+    border-radius: 10px;
+    background: #1a9f5c;
+    color: #ffffff;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid #1a9f5c;
+    transition: background-color 150ms ease, transform 150ms ease;
+}
+
+.btn-continue-shopping:hover,
+.btn-continue-shopping:focus-visible {
+    background: #158450;
+}
+
+.btn-continue-shopping:active {
+    transform: translateY(1px);
+}
+
+.btn-continue-shopping:focus-visible {
+    outline: 2px solid #1a9f5c;
+    outline-offset: 2px;
+}
+
+/* .btn-secondary-outline intentionally not redefined here — it reuses the
+   existing site-wide style already used elsewhere in checkout (e.g.
+   "Edit Shipping Information", "Return to Cart") so this page stays
+   visually consistent without introducing a second secondary-button look.
+   If that class isn't globally available, add a minimal fallback below. */
+
+/* -------------------------------------------------------------- responsive */
+.btn-continue-shopping-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.85rem 1.5rem;
+    border-radius: 10px;
+    background: #E4A11B;
+    color: #ffffff;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid #d1d5db;
+    transition: background-color 150ms ease, transform 150ms ease;
+}
+
+.btn-continue-shopping-secondary:hover,
+.btn-continue-shopping-secondary:focus-visible {
+    background: #158450;
+}
+
+.btn-continue-shopping-secondary:active {
+    transform: translateY(1px);
+}
+
+.btn-continue-shopping-secondary:focus-visible {
+    outline: 2px solid #E4A11B;
+    outline-offset: 2px;
+}
+
+
+
+@media (max-width: 480px) {
+    .success-card {
+        padding: 2rem 1.25rem;
+        border-radius: 12px;
+    }
+
+    .success-heading {
+        font-size: 1.5rem;
+    }
+
+    .amount-block {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+}

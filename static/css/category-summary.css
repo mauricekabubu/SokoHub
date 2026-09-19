@@ -1,0 +1,154 @@
+/* =========================================================
+   Hero
+   ========================================================= */
+.sh-cs-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 56px 0 48px;
+  background: var(--cream);
+}
+.sh-cs-hero-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto;
+}
+.sh-cs-hero-title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  margin: 6px 0 14px;
+}
+.sh-cs-hero-text {
+  color: var(--muted);
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+.sh-cs-hero-shape {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+}
+.sh-cs-hero-shape-1 {
+  width: 320px; height: 320px;
+  background: var(--sage);
+  opacity: 0.5;
+  top: -140px; left: -80px;
+  filter: blur(10px);
+}
+.sh-cs-hero-shape-2 {
+  width: 260px; height: 260px;
+  background: var(--green-light);
+  opacity: 0.7;
+  bottom: -120px; right: -60px;
+  filter: blur(10px);
+}
+
+/* =========================================================
+   Category cards
+   ========================================================= */
+.sh-cs-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.sh-cs-card {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--white);
+  color: var(--text);
+  transition: transform 0.24s var(--ease), box-shadow 0.24s var(--ease), border-color 0.24s var(--ease);
+}
+.sh-cs-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--green);
+}
+.sh-cs-card-visual {
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green-dark);
+  transition: transform 0.35s var(--ease);
+}
+.sh-cs-card:hover .sh-cs-card-visual { transform: scale(1.04); }
+.sh-cs-card-visual-laptops { background: linear-gradient(135deg, var(--sage) 0%, var(--cream) 100%); }
+.sh-cs-card-visual-phones { background: linear-gradient(135deg, var(--green-light) 0%, var(--cream) 100%); }
+
+.sh-cs-card-body {
+  padding: 22px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.sh-cs-card-body h3 { margin: 0 0 4px; font-size: 1.15rem; }
+.sh-cs-card-body p { margin: 0; color: var(--muted); font-size: 0.88rem; }
+.sh-cs-card-arrow {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  flex-shrink: 0;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease), transform 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.sh-cs-card:hover .sh-cs-card-arrow {
+  background: var(--green);
+  color: var(--white);
+  border-color: var(--green);
+  transform: translateX(3px);
+}
+
+/* =========================================================
+   Start shopping CTA
+   ========================================================= */
+.sh-cs-cta {
+  background: var(--green-dark);
+  color: var(--white);
+  text-align: center;
+  padding: 60px 0;
+}
+.sh-cs-cta h2 { color: var(--white); margin: 0 0 10px; }
+.sh-cs-cta p { color: rgba(255,255,255,0.82); margin: 0 0 24px; }
+
+/* =========================================================
+   Trust section
+   ========================================================= */
+.sh-cs-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.sh-cs-trust-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+}
+.sh-cs-trust-item .sh-cat-icon {
+  width: 44px; height: 44px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  margin: 0;
+  flex-shrink: 0;
+}
+.sh-cs-trust-item h4 { margin: 0 0 3px; font-size: 0.96rem; }
+.sh-cs-trust-item p { margin: 0; color: var(--muted); font-size: 0.85rem; }
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 900px) {
+  .sh-cs-trust-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .sh-cs-card-grid { grid-template-columns: 1fr; }
+  .sh-cs-trust-grid { grid-template-columns: 1fr; }
+  .sh-cs-hero { padding: 40px 0 36px; }
+}

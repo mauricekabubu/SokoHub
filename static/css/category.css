@@ -1,0 +1,87 @@
+/* =========================================================
+   Category hero
+   ========================================================= */
+.sh-category-hero {
+  background: linear-gradient(180deg, var(--sage) 0%, var(--cream) 100%);
+  padding: 32px 0 44px;
+}
+.sh-category-title {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  margin: 6px 0 8px;
+}
+.sh-category-text {
+  color: var(--muted);
+  margin: 0;
+  max-width: 56ch;
+}
+
+/* Breadcrumb (self-contained, matches product/cart pages) */
+.sh-category-breadcrumb { border-bottom: none; padding: 0 0 18px; }
+.sh-breadcrumb ol {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  font-size: 0.86rem;
+}
+.sh-breadcrumb li:not(:last-child)::after {
+  content: "/";
+  margin-left: 8px;
+  color: var(--border);
+}
+.sh-breadcrumb a { color: var(--green-dark); font-weight: 500; }
+.sh-breadcrumb a:hover { text-decoration: underline; }
+.sh-breadcrumb li[aria-current="page"] { color: var(--muted); }
+
+/* =========================================================
+   Toolbar
+   ========================================================= */
+.sh-category-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 32px 0 28px;
+}
+.sh-category-toolbar h2 { margin: 0 0 4px; font-size: 1.4rem; }
+.sh-category-toolbar p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+.sh-category-count {
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+  background: var(--cream);
+  padding: 7px 14px;
+  border-radius: 999px;
+}
+
+/* =========================================================
+   Grid spacing + entrance
+   ========================================================= */
+.sh-category-grid { padding-bottom: 64px; }
+.sh-category-grid .sh-product-card {
+  animation: sh-category-fade-in 0.4s var(--ease) backwards;
+}
+@keyframes sh-category-fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sh-category-grid .sh-product-card { animation: none; }
+}
+
+/* =========================================================
+   Empty state
+   ========================================================= */
+.sh-category-empty {
+  text-align: center;
+  padding: 90px 20px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+.sh-category-empty-icon { font-size: 2.6rem; display: block; margin-bottom: 18px; }
+.sh-category-empty h2 { margin: 0 0 10px; font-size: 1.4rem; }
+.sh-category-empty p { color: var(--muted); line-height: 1.6; margin: 0 0 26px; }

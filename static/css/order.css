@@ -1,0 +1,177 @@
+/* =========================================================
+   Order header
+   ========================================================= */
+.sh-order-header { align-items: center; }
+.sh-order-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.sh-order-status-badge { font-size: 0.86rem; padding: 7px 14px; }
+.sh-order-total {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--green-dark);
+}
+
+/* =========================================================
+   Two-column layout
+   ========================================================= */
+.sh-order-layout {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.sh-order-main, .sh-order-side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sh-order-section { padding: 24px; }
+.sh-order-section-title {
+  font-size: 1.02rem;
+  margin: 0 0 18px;
+  font-family: var(--font-display);
+}
+
+/* =========================================================
+   Overview / customer definition lists
+   ========================================================= */
+.sh-order-overview-list { margin: 0; }
+.sh-order-overview-list > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+}
+.sh-order-overview-list > div:last-child { border-bottom: none; padding-bottom: 0; }
+.sh-order-overview-list > div:first-child { padding-top: 0; }
+.sh-order-overview-list dt {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+.sh-order-overview-list dd {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-align: right;
+  word-break: break-word;
+}
+
+/* =========================================================
+   Shipping address
+   ========================================================= */
+.sh-order-address {
+  background: var(--cream);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin: 0;
+  color: var(--text);
+  line-height: 1.7;
+  white-space: pre-line;
+  font-size: 0.92rem;
+}
+
+/* =========================================================
+   Order items
+   ========================================================= */
+.sh-order-items-cards { display: none; }
+.sh-order-item-product { font-weight: 600; }
+.sh-order-item-price { font-weight: 700; color: var(--green-dark); font-family: var(--font-display); }
+.sh-order-qty-badge {
+  display: inline-block;
+  background: var(--sage);
+  color: var(--green-dark);
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+.sh-order-item-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin-bottom: 10px;
+}
+.sh-order-item-card:last-child { margin-bottom: 0; }
+.sh-order-item-card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+/* =========================================================
+   Timeline
+   ========================================================= */
+.sh-order-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.sh-order-timeline-step {
+  position: relative;
+  display: flex;
+  gap: 14px;
+  padding-bottom: 22px;
+  padding-left: 4px;
+}
+.sh-order-timeline-step:last-child { padding-bottom: 0; }
+.sh-order-timeline-step::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 20px;
+  bottom: -2px;
+  width: 1px;
+  background: var(--border);
+}
+.sh-order-timeline-step:last-child::before { display: none; }
+.sh-order-timeline-dot {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--border);
+  border: 3px solid var(--white);
+  box-shadow: 0 0 0 1px var(--border);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.sh-order-timeline-step.is-complete .sh-order-timeline-dot {
+  background: var(--green);
+  box-shadow: 0 0 0 1px var(--green);
+}
+.sh-order-timeline-step h4 { margin: 0 0 2px; font-size: 0.92rem; }
+.sh-order-timeline-step p { margin: 0; color: var(--muted); font-size: 0.86rem; }
+
+/* =========================================================
+   Fulfillment card
+   ========================================================= */
+.sh-fulfillment-status {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.sh-fulfillment-status span { font-size: 1.3rem; line-height: 1; }
+.sh-fulfillment-status h3 { margin: 0 0 3px; font-size: 1rem; }
+.sh-fulfillment-status p { margin: 0; color: var(--muted); font-size: 0.88rem; }
+.sh-fulfillment-btn { width: 100%; padding: 13px; font-size: 0.92rem; }
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 900px) {
+  .sh-order-layout { grid-template-columns: 1fr; }
+  .sh-order-header-right { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .sh-order-items-table-wrap { display: none; }
+  .sh-order-items-cards { display: block; }
+}
+@media (max-width: 480px) {
+  .sh-order-header { flex-direction: column; align-items: flex-start; gap: 14px; }
+}
